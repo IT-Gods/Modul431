@@ -30,4 +30,16 @@ achieve our creative vision and challenge ourselves to learn new things.
 |---|---|
 |code/|The directory containing the source code|
 |documentation/|The directory containing the documentation of the project|
+|sources.md|This is a file containing various information sources|
 |README.md|This file|
+
+### Requirements
+
+Some programs are required to use this project.
+
+First you will require `Python3` this is the programming language that this project
+is written in.
+
+Then you will need the library `Pygame` this is a library used to make simple video games.
+
+
