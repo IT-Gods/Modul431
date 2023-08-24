@@ -12,5 +12,5 @@ These are some useful sources for contributors
 
 ### Programming documentations
 
--[Python](https://docs.python.org/3/)
--[Pygame](https://www.pygame.org/docs/)
+- [Python](https://docs.python.org/3/)
+- [Pygame](https://www.pygame.org/docs/)
