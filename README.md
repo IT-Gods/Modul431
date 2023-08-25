@@ -44,5 +44,6 @@ Then you will need the library `Pygame` this is a library used to make simple vi
 
 Installation guides are provided in the `sources.md` file.
 
-## important Links
-[Scrum board](https://gitlab.com/Nasrin_TBZ/spaceinvetors/-/boards)
+## Contributor Links
+
+- [Scrum board](https://gitlab.com/Nasrin_TBZ/spaceinvetors/-/boards)
