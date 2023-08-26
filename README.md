@@ -6,8 +6,29 @@
 - Nasrin Jafari
 - Moray Yesilgueller
 
+### Quickstart
 
-### Preamble
+- install python based on you OS
+- create a virtual environment(optional) but it has several benefits like create an isolated environment for your project which reduces the chance of conflicts between your others project etc. ▶️
+```
+python3 -m venv venv
+
+```
+- activate the virtual environment ▶️
+ ```
+ source venv/bin/activate
+
+ ```
+   
+- Update the project dependencies ▶️
+  ```
+  pip install -r reqiurements.txt´
+  
+  ```
+
+
+
+- ### Preamble
 
 We are students of the Technische Berufsschule Zürich (TBZ) and this is a
 project for the Module 431, an introductory Module to IT. This is a graded 
