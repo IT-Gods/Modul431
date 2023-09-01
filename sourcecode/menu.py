@@ -1,28 +1,78 @@
-import initialization
-from pygame_menu import themes
-from time import sleep
+import pygame
+
+pygame.init()                                   
+screen = pygame.display.set_mode((1280, 720))       #Screen size
+clock = pygame.time.Clock()                         #time
+running = True                                      #this should be obvious
+
+GREEN = pygame.Color(0,255,0)
+RED = pygame.Color(255,0,0)
+BLACK = pygame.Color(0,0,0)
+WHITE = pygame.Color(255,255,255)
+
+THEME1= [GREEN,RED,BLACK,WHITE]
+
+def make_menu(colorTheme):
+
+    #variables
+    select = 0
+    timesSelect = 0
 
 
-def set_players():
-    pass
+    #size parameters
 
-def start_game():
-    pass
+    screenMiddle = [1280/2,720/2]
 
 
-def main_menu():
-    menu = pygame_menu.Menu(300,400,'Welcome',
-                            theme=pygame_menu.themes.THEME_BLUE)
+    menuWallSize = [300,600]
+    menuWallXY = [screenMiddle[0]-menuWallSize[0]/2,screenMiddle[1]-menuWallSize[1]/2]  
+    borderWall = 10
 
-    menu.add.text_input('Name:',default='user')
-    menu.add.selector('PLAYERS:', [('SINGLE',1),('DOUBLE',2)],onchange=set_players)
-    menu.add.button('PLAY',start_game)
-    menu.add.button('QUIT',pygame_menu.events.EXIT)
+    selectOptionSize = [150,75]
+    selectOptionSpace = 85
+    selectOptionXY = [screenMiddle[0] - selectOptionSize[0]/2 , screenMiddle[1] - selectOptionSize[1]/2 -100]
 
-    menu.mainloop(screen)
+    #color parameters
 
 
-main_menu()
+
+
+    menuWall1 = pygame.Rect(menuWallXY[0],menuWallXY[1],menuWallSize[0],menuWallSize[1])
+    menuWall2 = pygame.Rect(menuWallXY[0] + borderWall , menuWallXY[1] + borderWall , menuWallSize[0] - 2 * borderWall , menuWallSize[1] - 2 * borderWall)
+
+    pygame.draw.rect(screen,colorTheme[0],menuWall1)
+    pygame.draw.rect(screen,colorTheme[2],menuWall2)
+
+    selectOption1 = pygame.Rect(selectOptionXY[0] , selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1])
+    timesSelect+=1
+    selectOption2 = pygame.Rect(selectOptionXY[0] , selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1])
+    timesSelect += 1
+    selectOption3 = pygame.Rect(selectOptionXY[0] , selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1])
+    timesSelect += 1
+    selectOption4 = pygame.Rect(selectOptionXY[0] , selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1])
+
+    pygame.draw.rect(screen,colorTheme[0],selectOption1)
+    pygame.draw.rect(screen,colorTheme[0],selectOption2)
+    pygame.draw.rect(screen,colorTheme[0],selectOption3)
+    pygame.draw.rect(screen,colorTheme[0],selectOption4)
+
+
+
+
+
+
+
+while running:   
+    for event in pygame.event.get():             
+        if event.type == pygame.QUIT:
+            running = False
+    make_menu(THEME1)
+    pygame.display.flip()
+
+
+
+
+
 
 
 
