@@ -7,8 +7,5 @@ pygame==2.5.1
 requests==2.31.0
 urllib3==2.0.4
 yarg==0.1.9
-<<<<<<< HEAD
 pygame-menu==2.3.3
-=======
-pygame-menu==4.4.3
->>>>>>> refs/remotes/origin/main
+
