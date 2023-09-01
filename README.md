@@ -22,7 +22,7 @@ python3 -m venv venv
    
 - Update the project dependencies ▶️
   ```
-  pip install -r reqiurements.txt´
+  pip install -r reqiurements.txt
   
   ```
 
