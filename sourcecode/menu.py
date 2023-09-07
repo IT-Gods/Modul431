@@ -24,9 +24,9 @@ def make_menu(colorTheme):
     screenMiddle = [1280/2,720/2]
 
 
-    menuWallSize = [300,600]
+    menuWallSize = [1210,700]
     menuWallXY = [screenMiddle[0]-menuWallSize[0]/2,screenMiddle[1]-menuWallSize[1]/2]  
-    borderWall = 10
+    borderWall = 5
 
     selectOptionSize = [150,75]
     selectOptionSpace = 85
