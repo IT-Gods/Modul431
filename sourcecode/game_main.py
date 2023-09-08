@@ -27,7 +27,11 @@ bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
 
-#
+enemySize = [20,20]
+enemyDist = [DISPLAY_SIZE[0]/12-50,DISPLAY_SIZE[1]/8-50]
+enemyXY = [Display_SIZE[0]/12-enemyDist[0]/5,DISPLAY_SIZE[1]/8-enemyDist[1]/5]
+enemyAlive[3][9]
+
 
 
 #bullet directions
