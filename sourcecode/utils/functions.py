@@ -38,3 +38,12 @@ def detectCollision(XY,sizeWH,screenSize):
         return True
 
 
+def makeEnemies(color,XY,sizeWH,screen, arr, dist):
+    for enemiesRow in range(len(arr)):
+        for enemiesColumn in range(len(arr[enemiesRow])):
+            makeRect(color, XY , sizeWH, screen)
+            XY[1] += dist[1] + sizeWH[1]
+        XY[0] += dist[0] + sizeWH[0]
+        XY[1] -= dist[1] * 4 + sizeWH[1] * 4
+    XY[0] -= dist[0] * 10 + sizeWH[0] * 10
+
