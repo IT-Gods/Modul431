@@ -2,7 +2,7 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-import game_components as g
+import game_components as c
 
 DISPLAY_SIZE = [1280,720]
 
@@ -31,9 +31,9 @@ while running:
             running = False
         if event.type == pygame.QUIT:
             running = False
-    g.updatePlayerXY(playerXY, playerSize,DISPLAY_SIZE)
+    c.updatePlayerXY(playerXY, playerSize,DISPLAY_SIZE)
 
     screen.fill("black")
         
-    g.makeRect(THEME1,playerXY,playerSize,screen)
+    c.makeRect(THEME1,playerXY,playerSize,screen)
     pygame.display.flip()                       #updates entire screen
