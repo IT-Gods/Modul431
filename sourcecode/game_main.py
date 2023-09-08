@@ -39,13 +39,6 @@ while running:
             running = False
         if event.type == pygame.QUIT:
             running = False
-<<<<<<< HEAD
-    g.updatePlayerXY(playerXY, playerSize,DISPLAY_SIZE)
-
-    screen.fill("black")
-        
-    g.makeRect(THEME1[0],playerXY,playerSize,screen)
-=======
         if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
             if bulletHere == False:                 #checks if bullet on screen
                 bulletXY=[playerXY[0]+(bulletSize[0]/4),playerXY[1]-playerSize[1]/2]
