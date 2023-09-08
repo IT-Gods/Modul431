@@ -2,6 +2,7 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
+import components.py
 
 DISPLAY_SIZE = [1280,720]
 
@@ -21,9 +22,6 @@ THEME1= [GREEN,RED,BLACK,WHITE]
 playerSize = [75,75]
 playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*3/4)-playerSize[1]/2]
 
-def make_player(THEME,playerXY,playerSize):
-    playerRect = pygame.Rect(playerXY[0],playerXY[1],playerSize[0],playerSize[1])
-    pygame.draw.rect(screen,THEME1[0],playerRect)
 
 
 while running:
@@ -33,13 +31,9 @@ while running:
             running = False
         if event.type == pygame.QUIT:
             running = False
+    updatePlayerXY(playerXY, playerSize)
 
-
-    if pressed[pygame.K_LEFT] and playerXY[0] != 0:
-        playerXY[0] -= 0.5
-    if pressed[pygame.K_RIGHT] and playerXY[0] + playerSize[1] != DISPLAY_SIZE[0] :
-        playerXY[0] += 0.5
     screen.fill("black")
         
-    make_player(THEME1,playerXY,playerSize)
+    makeRect(THEME1,playerXY,playerSize)
     pygame.display.flip()                       #updates entire screen
