@@ -53,5 +53,4 @@ while running:
     #create player model and update movement
     playerXY = c.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
     c.makeRect(THEME1[0],playerXY,playerSize,screen)
->>>>>>> fire
     pygame.display.flip()                       #updates entire screen
