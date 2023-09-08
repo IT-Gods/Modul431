@@ -2,7 +2,7 @@ import pygame
 
 
 def makeRect(color,XY,SizeWH,screen):
-    playerRect = pygame.Rect(XY[0],XY[1],SizeWH[0],SizeWH[1])
+    playerRect = pygame.Rect(XY[0],XY[1],Size[0],Size[1])
     pygame.draw.rect(screen,color,playerRect)
 
 
