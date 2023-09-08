@@ -42,15 +42,15 @@ while running:
         if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
             if bulletHere == False:                 #checks if bullet on screen
                 bulletXY=[playerXY[0]+(bulletSize[0]/4),playerXY[1]-playerSize[1]/2]
-                bulletXY = c.updateFire(THEME1[1],bulletXY,bulletSize,screen)
+                bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen)
                 bulletHere = True
     
     if bulletHere:  #moves bullet if present and checks collision
-        c.updateFire(THEME1[1],bulletXY,bulletSize,screen)
-        bulletHere = c.detectCollision(bulletXY,bulletSize,DISPLAY_SIZE)
+        g.updateFire(THEME1[1],bulletXY,bulletSize,screen)
+        bulletHere = g.detectCollision(bulletXY,bulletSize,DISPLAY_SIZE)
 
     
     #create player model and update movement
-    playerXY = c.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
-    c.makeRect(THEME1[0],playerXY,playerSize,screen)
+    playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
+    g.makeRect(THEME1[0],playerXY,playerSize,screen)
     pygame.display.flip()                       #updates entire screen
