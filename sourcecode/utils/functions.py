@@ -21,8 +21,8 @@ def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
 
 
 #function to update fire and detect collision returns new coordinates of bullet
-def updateFire(color,XY,sizeWH,screen):
-    XY[1] -=1
+def updateFire(color,XY,sizeWH,screen,direction):
+    XY[1] +=1*direction
     makeRect(color,XY,sizeWH,screen)
 
     return XY

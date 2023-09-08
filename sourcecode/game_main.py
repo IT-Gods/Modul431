@@ -20,12 +20,19 @@ WHITE = pygame.Color(255,255,255)
 THEME1= [GREEN,RED,BLACK,WHITE]
 
 #definitions of ingame objects
-playerSize = [75,75]
-playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*3/4)-playerSize[1]/2]
+playerSize = [20,20]
+playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*7/8)-playerSize[1]/2]
 
-bulletSize = [50,50]
+bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
+
+#
+
+
+#bullet directions
+bulletUp = -1
+bulletDown = 1
 
 
 #main game loop
@@ -41,12 +48,12 @@ while running:
             running = False
         if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
             if bulletHere == False:                 #checks if bullet on screen
-                bulletXY=[playerXY[0]+(bulletSize[0]/4),playerXY[1]-playerSize[1]/2]
-                bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen)
+                bulletXY=[playerXY[0]+playerSize[0]/2-(bulletSize[0]/2),playerXY[1]-playerSize[1]/2]
+                bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
                 bulletHere = True
     
     if bulletHere:  #moves bullet if present and checks collision
-        g.updateFire(THEME1[1],bulletXY,bulletSize,screen)
+        g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
         bulletHere = g.detectCollision(bulletXY,bulletSize,DISPLAY_SIZE)
 
     
