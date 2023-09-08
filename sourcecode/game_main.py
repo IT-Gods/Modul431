@@ -2,7 +2,7 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-import game_components as g
+import functions as g
 
 DISPLAY_SIZE = [1280,720]
 
