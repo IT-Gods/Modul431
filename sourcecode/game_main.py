@@ -27,17 +27,24 @@ bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
 
-enemySize = [20,20]
-enemyDist = [DISPLAY_SIZE[0]/12-50,DISPLAY_SIZE[1]/8-50]
-enemyXY = [Display_SIZE[0]/12-enemyDist[0]/5,DISPLAY_SIZE[1]/8-enemyDist[1]/5]
-enemyAlive[3][9]
+enemySize = [DISPLAY_SIZE[0] / 30, DISPLAY_SIZE[0] / 30]
+enemyDist = [enemySize[0] / 1.2, enemySize[1] / 1.2]
+enemyXY = [(DISPLAY_SIZE[0] / 2) - (5 * enemySize[0] )- (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (2 * enemySize[1]) - (1.5 * enemyDist[1]) ]
+enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
+    [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
+
+
+
+
 
 
 
 #bullet directions
 bulletUp = -1
 bulletDown = 1
-
+#general vars
+enemiesRow = 0
+enemiesColumn = 0
 
 #main game loop
 while running:
@@ -55,7 +62,11 @@ while running:
                 bulletXY=[playerXY[0]+playerSize[0]/2-(bulletSize[0]/2),playerXY[1]-playerSize[1]/2]
                 bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
                 bulletHere = True
+    # Implement the enemies
+    g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist )
     
+            
+            
     if bulletHere:  #moves bullet if present and checks collision
         g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
         bulletHere = g.detectCollision(bulletXY,bulletSize,DISPLAY_SIZE)
