@@ -2,7 +2,7 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-import components.py
+import game_components as g
 
 DISPLAY_SIZE = [1280,720]
 
@@ -23,17 +23,17 @@ playerSize = [75,75]
 playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*3/4)-playerSize[1]/2]
 
 
+pressed= pygame.key.get_pressed()
 
 while running:
-    pressed= pygame.key.get_pressed()
     for event in pygame.event.get():
         if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
             running = False
         if event.type == pygame.QUIT:
             running = False
-    updatePlayerXY(playerXY, playerSize)
+    g.updatePlayerXY(playerXY, playerSize,DISPLAY_SIZE)
 
     screen.fill("black")
         
-    makeRect(THEME1,playerXY,playerSize)
+    g.makeRect(THEME1,playerXY,playerSize,screen)
     pygame.display.flip()                       #updates entire screen
