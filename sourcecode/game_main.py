@@ -35,5 +35,5 @@ while running:
 
     screen.fill("black")
         
-    g.makeRect(THEME1,playerXY,playerSize,screen)
+    g.makeRect(THEME1[0],playerXY,playerSize,screen)
     pygame.display.flip()                       #updates entire screen
