@@ -1,13 +1,7 @@
 import pygame
 
-<<<<<<< HEAD:sourcecode/utils/functions.py
-def makeRect(theme,XY,Size,screen):
-    playerRect = pygame.Rect(XY[0],XY[1],Size[0],Size[1])
-    pygame.draw.rect(screen,theme[0],playerRect)
-=======
 #collection of functions used in the game
 
->>>>>>> fire:sourcecode/game_components.py
 
 
 #create a rectangle is used as filler for models
@@ -25,8 +19,7 @@ def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
     return playerXY
 
 
-<<<<<<< HEAD:sourcecode/utils/functions.py
-=======
+
 #function to update fire and detect collision returns new coordinates of bullet
 def updateFire(color,XY,sizeWH,screen):
     XY[1] -=1
@@ -45,4 +38,3 @@ def detectCollision(XY,sizeWH,screenSize):
         return True
 
 
->>>>>>> fire:sourcecode/game_components.py
