@@ -28,7 +28,7 @@ def updateFire(color,XY,sizeWH,screen,direction):
     return XY
 
 
-def detectCollision(XY,sizeWH,screenSize):
+def detectCollisionBorder(XY,sizeWH,screenSize):
 
     if XY[0] == 0 or XY[0] == screenSize[0]:
         return False
@@ -37,6 +37,18 @@ def detectCollision(XY,sizeWH,screenSize):
     else:
         return True
 
+def detectCollisionEnemies(XYBullet,sizeBullet,XYEnemy,sizeEnemy,distEnemy,aliveEnemy):
+    for column in range(len(aliveEnemy)):
+        for row in range(len(aliveEnemy[column])):
+            if aliveEnemy[column][row]:
+                if XYBullet[0] > (XYEnemy[0] + sizeEnemy[0]*column + distEnemy[0]*column)-sizeBullet[0] and XYBullet[0] < (XYEnemy[0] + sizeEnemy[0]*(column + 1) + distEnemy[0]*column):
+                    if XYBullet[1] > (XYEnemy[1] + sizeEnemy[1]*row + distEnemy[1]*row) and XYBullet[1] < (XYEnemy[1] + sizeEnemy[1]*row + distEnemy[1]*(row + 1)):
+                        aliveEnemy[column][row] = False
+                        return False
+                        
+                        
+                
+    return True
 
 def makeEnemies(color,XY,sizeWH,screen, arr, dist):
     for enemiesRow in range(len(arr)):

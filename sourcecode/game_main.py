@@ -69,9 +69,10 @@ while running:
             
     if bulletHere:  #moves bullet if present and checks collision
         g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
-        bulletHere = g.detectCollision(bulletXY,bulletSize,DISPLAY_SIZE)
+        bulletHere = g.detectCollisionEnemies(bulletXY,bulletSize,enemyXY,enemySize,enemyDist,enemyAlive)
+    if bulletHere:
+        bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
 
-    
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
     g.makeRect(THEME1[0],playerXY,playerSize,screen)
