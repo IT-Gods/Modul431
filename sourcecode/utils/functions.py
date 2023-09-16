@@ -1,4 +1,5 @@
 import pygame
+import re
 
 #collection of functions used in the game
 
@@ -34,7 +35,7 @@ def detectCollision(XY,sizeWH,screenSize):
         return False
     elif XY[1] == 0 or XY[1] == screenSize[1]:
         return False
-    else:
+    else: 
         return True
 
 
@@ -43,7 +44,35 @@ def makeEnemies(color,XY,sizeWH,screen, arr, dist):
         for enemiesColumn in range(len(arr[enemiesRow])):
             makeRect(color, XY , sizeWH, screen)
             XY[1] += dist[1] + sizeWH[1]
-        XY[0] += dist[0] + sizeWH[0]
-        XY[1] -= dist[1] * 4 + sizeWH[1] * 4
-    XY[0] -= dist[0] * 10 + sizeWH[0] * 10
+        XY[0] += dist[0] + sizeWH[0] 
+        XY[1] -= dist[1] * 4 + sizeWH[1] * 4  
+    XY[0] -= dist[0] * 10 + sizeWH[0] * 10 
+
+
+def calculateXTopRight(XY,enemySize, enemyDist):
+   firstElement = XY[0] + (10 * enemySize[0]) + (9 * enemyDist[0]) 
+   secondElement = XY[1]
+   return [firstElement, secondElement]
+
+def moveEnemies(xRightTop,xyEnemies, DisplaySize):
+  result = xyEnemies
+  if  DisplaySize[0] - xRightTop[0] > 5:
+      result[0] = xyEnemies[0] + 0.02
+      result[1] = xyEnemies[1]
+      return result
+  else:
+      result[1] = xyEnemies[1]  * (0.02)
+      result[0] = xyEnemies[0] * - 0.02
+     
+      return result
+
+    
+
+    
+
+
+
+
+    
+
 
