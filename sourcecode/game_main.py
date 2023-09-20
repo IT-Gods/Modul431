@@ -38,7 +38,7 @@ enemyXY = [(DISPLAY_SIZE[0] / 2) - (xCoordinateValue * enemySize[0] )- (4.5 * en
 enemyXZ = [(DISPLAY_SIZE[0] / 2) + (xCoordinateValue * enemySize[0] ) + (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
 enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
     [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
-
+enemyDir = 1
 
 #bullet directions
 bulletUp = -1
@@ -64,10 +64,11 @@ while running:
                 bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
                 bulletHere = True
     # Implement the enemies
-    moveToRight = g.moveEnemies(g.calculateXTopRight(enemyXY, enemySize, enemyDist), enemyXY, DISPLAY_SIZE)
-   
-    print(g.calculateXTopRight(enemyXY, enemySize, enemyDist))
-    g.makeEnemies(THEME1[3],moveToRight, enemySize, screen,enemyAlive ,enemyDist)
+    xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
+    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir)
+
+
+    g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
 
   
 

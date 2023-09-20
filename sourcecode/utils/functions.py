@@ -52,27 +52,19 @@ def makeEnemies(color,XY,sizeWH,screen, arr, dist):
 def calculateXTopRight(XY,enemySize, enemyDist):
    firstElement = XY[0] + (10 * enemySize[0]) + (9 * enemyDist[0]) 
    secondElement = XY[1]
-   return [firstElement, secondElement]
+   return [firstElement, secondElement]     #i dont like how this is returned
 
-def moveEnemies(xRightTop,xyEnemies, DisplaySize):
-  result = xyEnemies
-  if  DisplaySize[0] - xRightTop[0] > 5:
-      result[0] = xyEnemies[0] + 0.02
-      result[1] = xyEnemies[1]
-      return result
-  else:
-      result[1] = xyEnemies[1]  * (0.02)
-      result[0] = xyEnemies[0] * - 0.02
-     
-      return result
+def moveEnemiesX(xyEnemies, directionEnemies):
+    xyEnemies[0] += 0.2*directionEnemies     
+    return xyEnemies
 
-    
-
-    
-
-
-
-
-    
+def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir):
+    if xyEnemies[0] < 5:
+        xyEnemies[1] += 10
+        enemyDir = 1
+    elif xyTopRight[0] > displaySize[0] - 5:
+        xyEnemies[1] += 10
+        enemyDir = -1
+    return xyEnemies , enemyDir
 
 
