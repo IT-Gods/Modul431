@@ -35,7 +35,6 @@ enemySize = [DISPLAY_SIZE[0] / 30, DISPLAY_SIZE[0] / 30]
 enemyDist = [enemySize[0] / 1.2, enemySize[1] / 1.2]
 # it detemines the most top left coordinate of the enemies and it accounts for the amount of the enemies their size and the spaces between them to make the enemies start centered on the x coordinate.
 enemyXY = [(DISPLAY_SIZE[0] / 2) - (xCoordinateValue * enemySize[0] )- (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
-enemyXZ = [(DISPLAY_SIZE[0] / 2) + (xCoordinateValue * enemySize[0] ) + (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
 enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
     [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
 enemyDir = 1
