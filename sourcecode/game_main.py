@@ -38,6 +38,7 @@ enemyXY = [(DISPLAY_SIZE[0] / 2) - (xCoordinateValue * enemySize[0] )- (4.5 * en
 enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
     [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
 enemyDir = 1
+enemyDead = [0,10]
 
 #bullet directions
 bulletUp = -1
@@ -64,7 +65,7 @@ while running:
                 bulletHere = True
     # Implement the enemies
     xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
-    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir)
+    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir,enemySize,enemyDist,enemyDead)
 
 
     g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
@@ -78,6 +79,7 @@ while running:
         bulletHere = g.detectCollisionEnemies(bulletXY,bulletSize,enemyXY,enemySize,enemyDist,enemyAlive)
     if bulletHere:
         bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
+        enemyDead = g.rowDead(enemyDead,enemyAlive)
 
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 

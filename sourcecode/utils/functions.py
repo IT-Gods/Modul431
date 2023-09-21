@@ -71,13 +71,33 @@ def moveEnemiesX(xyEnemies, directionEnemies):
     xyEnemies[0] += 0.2*directionEnemies     
     return xyEnemies
 
-def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir):
-    if xyEnemies[0] < 5:
+def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir,sizeEnemy,distEnemy,deadEnemy):
+    if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < 5:
         xyEnemies[1] += 10
         enemyDir = 1
-    elif xyTopRight[0] > displaySize[0] - 5:
+    elif xyTopRight[0] - (sizeEnemy[0]+distEnemy[0])*(10 -deadEnemy[1]) > displaySize[0] - 5:
         xyEnemies[1] += 10
         enemyDir = -1
     return xyEnemies , enemyDir
+
+def rowDead(deadEnemy,aliveEnemy):
+    counter = 0
+    for i in range(0,len(aliveEnemy[deadEnemy[0]])):
+        if not aliveEnemy[deadEnemy[0]][i]:
+            counter += 1
+    if counter == 3:
+        deadEnemy[0] += 1
+    counter = 0
+    for i in range(0,len(aliveEnemy[deadEnemy[1]-1])):
+        if not aliveEnemy[deadEnemy[1]-1][i]:
+            counter += 1
+    if counter == 3:
+        deadEnemy[1] -= 1
+    return deadEnemy
+
+
+
+
+
 
 
