@@ -2,6 +2,7 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
+
 import utils.functions as g
 DISPLAY_SIZE = [1280,720]
 
@@ -27,13 +28,17 @@ bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
 
+
+xCoordinateValue = 5
+yCoordinateValue = 2 
 enemySize = [DISPLAY_SIZE[0] / 30, DISPLAY_SIZE[0] / 30]
 enemyDist = [enemySize[0] / 1.2, enemySize[1] / 1.2]
 # it detemines the most top left coordinate of the enemies and it accounts for the amount of the enemies their size and the spaces between them to make the enemies start centered on the x coordinate.
-enemyXY = [(DISPLAY_SIZE[0] / 2) - (5 * enemySize[0] )- (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (2 * enemySize[1]) - (1.5 * enemyDist[1]) ]
+enemyXY = [(DISPLAY_SIZE[0] / 2) - (xCoordinateValue * enemySize[0] )- (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
+enemyXZ = [(DISPLAY_SIZE[0] / 2) + (xCoordinateValue * enemySize[0] ) + (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
 enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
     [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
-
+enemyDir = 1
 
 #bullet directions
 bulletUp = -1
@@ -44,7 +49,7 @@ enemiesColumn = 0
 
 #main game loop
 while running:
-
+   
     screen.fill("black")
     
     pressed = pygame.key.get_pressed()
@@ -59,9 +64,15 @@ while running:
                 bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
                 bulletHere = True
     # Implement the enemies
-    g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist )
-    
-            
+    xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
+    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir)
+
+
+    g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
+
+  
+
+
             
     if bulletHere:  #moves bullet if present and checks collision
         g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
@@ -72,4 +83,7 @@ while running:
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
     g.makeRect(THEME1[0],playerXY,playerSize,screen)
-    pygame.display.flip()                       #updates entire screen
+
+    pygame.display.flip()  
+   
+                    #updates entire screen
