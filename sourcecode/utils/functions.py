@@ -82,16 +82,16 @@ def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir,sizeEnemy,distEne
 
 def rowDead(deadEnemy,aliveEnemy):
     counter = 0
-    for i in range(0,len(aliveEnemy[deadEnemy[0]])):
+    for i in range(0,len(aliveEnemy[deadEnemy[0]-1])):
         if not aliveEnemy[deadEnemy[0]][i]:
             counter += 1
-    if counter == 3:
+    if counter == 4 and deadEnemy[0] < 9:
         deadEnemy[0] += 1
     counter = 0
     for i in range(0,len(aliveEnemy[deadEnemy[1]-1])):
         if not aliveEnemy[deadEnemy[1]-1][i]:
             counter += 1
-    if counter == 3:
+    if counter == 4 and deadEnemy[1] > 0:
         deadEnemy[1] -= 1
     return deadEnemy
 
