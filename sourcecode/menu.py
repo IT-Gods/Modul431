@@ -69,7 +69,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
    
-    g.make_frame(screen,DISPLAY_SIZE,THEME1, 70, 22, 5)
+    make_menu(THEME1)
     pygame.display.flip()
 
 
