@@ -104,6 +104,14 @@ def make_playground(screen,DisplaySize ,theme, safeAreaX, safeAreaY):
      screen.fill(theme[0])
      pygame.draw.rect(screen,theme[2],playgroundBodyDimention)
 
+def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope):
+    playerZone = displayXY[1] / 2 - (displayXY[1] - playerXY[1])  + playerContainerScope * playerSize[1]
+    return enemyXY[1] >  playerZone - playerSize[1]
+       
+    
+        
+
+
 
 
 
