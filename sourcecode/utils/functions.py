@@ -71,11 +71,11 @@ def moveEnemiesX(xyEnemies, directionEnemies):
     xyEnemies[0] += 0.2*directionEnemies     
     return xyEnemies
 
-def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir,sizeEnemy,distEnemy,deadEnemy):
-    if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < 5:
+def collisionEnemies(xyEnemies,xyTopRight,displaySize,enemyDir,sizeEnemy,distEnemy,deadEnemy, safeArea):
+    if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < safeArea[0] - 5:
         xyEnemies[1] += 10
         enemyDir = 1
-    elif xyTopRight[0] - (sizeEnemy[0]+distEnemy[0])*(10 -deadEnemy[1]) > displaySize[0] - 5:
+    elif xyTopRight[0] - (sizeEnemy[0]+distEnemy[0])*(10 -deadEnemy[1]) > displaySize[0] - (safeArea[0] - 5):
         xyEnemies[1] += 10
         enemyDir = -1
     return xyEnemies , enemyDir
@@ -94,6 +94,19 @@ def rowDead(deadEnemy,aliveEnemy):
     if counter == 4 and deadEnemy[1] > 0:
         deadEnemy[1] -= 1
     return deadEnemy
+
+def make_playground(screen,DisplaySize ,theme, safeAreaX, safeAreaY):
+
+     screenMiddle = [DisplaySize[0]/2,DisplaySize[1]/2]
+     playgroundWallDimention = [DisplaySize[0] - safeAreaX,DisplaySize[1] - safeAreaY]
+     playgroundXY = [screenMiddle[0] - playgroundWallDimention[0] / 2,screenMiddle[1] - playgroundWallDimention[1] / 2]  
+     playgroundBodyDimention = pygame.Rect(playgroundXY[0],playgroundXY[1],playgroundWallDimention[0],playgroundWallDimention[1])
+     screen.fill(theme[0])
+     pygame.draw.rect(screen,theme[2],playgroundBodyDimention)
+
+
+
+
 
 
 

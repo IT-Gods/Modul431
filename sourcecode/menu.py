@@ -1,9 +1,11 @@
 import pygame
+import utils.functions as g
 
 pygame.init()                                   
 screen = pygame.display.set_mode((1280, 720))       #Screen size
 clock = pygame.time.Clock()                         #time
-running = True                                      #this should be obvious
+running = True  
+DISPLAY_SIZE = [1280,720]                                    #this should be obvious
 
 GREEN = pygame.Color(0,255,0)
 RED = pygame.Color(255,0,0)
@@ -66,7 +68,8 @@ while running:
     for event in pygame.event.get():             
         if event.type == pygame.QUIT:
             running = False
-    make_menu(THEME1)
+   
+    g.make_frame(screen,DISPLAY_SIZE,THEME1, 70, 22, 5)
     pygame.display.flip()
 
 

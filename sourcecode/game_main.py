@@ -28,6 +28,8 @@ bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
 
+playgroundSafeAreas = [20, 20]
+
 
 xCoordinateValue = 5
 yCoordinateValue = 2 
@@ -50,9 +52,11 @@ enemiesColumn = 0
 #main game loop
 while running:
    
-    screen.fill("black")
+
     
     pressed = pygame.key.get_pressed()
+  
+    g.make_playground(screen,DISPLAY_SIZE,THEME1, playgroundSafeAreas[0],playgroundSafeAreas[1] )
     for event in pygame.event.get():
         if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
             running = False
@@ -65,9 +69,9 @@ while running:
                 bulletHere = True
     # Implement the enemies
     xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
-    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir,enemySize,enemyDist,enemyDead)
+    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir,enemySize,enemyDist,enemyDead, playgroundSafeAreas)
 
-
+    
     g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
 
   
@@ -86,7 +90,6 @@ while running:
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
     g.makeRect(THEME1[0],playerXY,playerSize,screen)
-
     pygame.display.flip()  
    
                     #updates entire screen
