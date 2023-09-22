@@ -37,8 +37,11 @@ enemyDist = [enemySize[0] / 1.2, enemySize[1] / 1.2]
 enemyXY = [(DISPLAY_SIZE[0] / 2) - (xCoordinateValue * enemySize[0] )- (4.5 * enemyDist[0]),(DISPLAY_SIZE[1] / 3) - (yCoordinateValue * enemySize[1]) - (1.5 * enemyDist[1]) ]
 enemyAlive = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
     [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
+enemyLowest = [4,4,4,4,4,4,4,4,4,4]
 enemyDir = 1
 enemyDead = [0,10]
+counter = 0
+bullet1Here = False
 
 #bullet directions
 bulletUp = -1
@@ -55,6 +58,7 @@ while running:
     pressed = pygame.key.get_pressed()
     for event in pygame.event.get():
         if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
+            print(enemyLowest)
             running = False
         if event.type == pygame.QUIT:
             running = False
@@ -77,11 +81,23 @@ while running:
     if bulletHere:  #moves bullet if present and checks collision
         g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
         bulletHere = g.detectCollisionEnemies(bulletXY,bulletSize,enemyXY,enemySize,enemyDist,enemyAlive)
-    enemyDead = g.rowDead(enemyDead,enemyAlive)
+        if not bulletHere:
+            enemyDead = g.rowDead(enemyDead,enemyAlive)
+            enemyLowest = g.updateLowest(enemyLowest,enemyAlive)
 
+    
 
     if bulletHere:
         bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
+
+
+    counter += 1
+    if counter == 2000:
+        bullet1 , bullet1Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
+        counter = 0
+
+    if bullet1Here:
+        bullet1 = g.updateFire(THEME1[1],bullet1,bulletSize,screen,0.2)
 
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 

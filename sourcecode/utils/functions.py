@@ -1,5 +1,5 @@
 import pygame
-import re
+import random
 
 #collection of functions used in the game
 
@@ -95,8 +95,22 @@ def rowDead(deadEnemy,aliveEnemy):
         deadEnemy[1] -= 1
     return deadEnemy
 
+def updateLowest(lowestEnemy,aliveEnemy):
+    for enemiesRow in range(len(aliveEnemy)):
+        x = 0
+        for enemiesColumn in range(len(aliveEnemy[enemiesRow])):
+            if aliveEnemy[enemiesRow][enemiesColumn] and enemiesColumn + 1 > x:
+                x = enemiesColumn + 1
+                lowestEnemy[enemiesRow] = x
+    return lowestEnemy
 
+def enemyFire(xyEnemy,distEnemy,sizeEnemy,lowestEnemy,sizeBullet,color,screen):
+    randomNum = random.randint(1,10)
+    xy = [xyEnemy[0] + (randomNum - 1)*distEnemy[0] +((randomNum)* sizeEnemy[0]) , xyEnemy[1] +(lowestEnemy[randomNum - 1] - 1)*distEnemy[1] + (lowestEnemy[randomNum - 1]) * sizeEnemy[1]]
+    makeRect(color ,xy ,sizeBullet,screen)
+    return xy , True
 
+    
 
 
 
