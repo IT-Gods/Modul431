@@ -25,7 +25,6 @@ def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
 def updateFire(color,XY,sizeWH,screen,direction):
     XY[1] +=1*direction
     makeRect(color,XY,sizeWH,screen)
-
     return XY
 
 
@@ -45,6 +44,7 @@ def detectCollisionEnemies(XYBullet,sizeBullet,XYEnemy,sizeEnemy,distEnemy,alive
                 if XYBullet[0] > (XYEnemy[0] + sizeEnemy[0]*column + distEnemy[0]*column)-sizeBullet[0] and XYBullet[0] < (XYEnemy[0] + sizeEnemy[0]*(column + 1) + distEnemy[0]*column):
                     if XYBullet[1] > (XYEnemy[1] + sizeEnemy[1]*row + distEnemy[1]*row) and XYBullet[1] < (XYEnemy[1] + sizeEnemy[1]*row + distEnemy[1]*(row + 1)):
                         aliveEnemy[column][row] = False
+
                         return False
                         
                         
@@ -87,6 +87,7 @@ def rowDead(deadEnemy,aliveEnemy):
             counter += 1
     if counter == 4 and deadEnemy[0] < 9:
         deadEnemy[0] += 1
+        
     counter = 0
     for i in range(0,len(aliveEnemy[deadEnemy[1]-1])):
         if not aliveEnemy[deadEnemy[1]-1][i]:
@@ -104,9 +105,25 @@ def make_playground(screen,DisplaySize ,theme, safeAreaX, safeAreaY):
      screen.fill(theme[0])
      pygame.draw.rect(screen,theme[2],playgroundBodyDimention)
 
-def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope):
+def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope,enemyDeadCounter, enemyDist, enemySize):
     playerZone = displayXY[1] / 2 - (displayXY[1] - playerXY[1])  + playerContainerScope * playerSize[1]
-    return enemyXY[1] >  playerZone - playerSize[1]
+
+    if enemyDeadCounter >= 1:
+       return enemyXY[1] -  ((enemyDeadCounter * (enemySize[1] + enemyDist[1]) ) ) >  playerZone - playerSize[1]
+    else:
+       return enemyXY[1] >  playerZone - playerSize[1]
+
+
+def detectDeadRow(enemyAlive):
+      counter = 0
+      for row in range(len(enemyAlive)):
+        for column in range(len(enemyAlive[row])):
+            if not enemyAlive[row][column]:
+              counter += 1
+        return counter   
+
+
+
        
     
         

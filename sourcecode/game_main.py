@@ -48,7 +48,7 @@ bulletDown = 1
 #general vars
 enemiesRow = 0
 enemiesColumn = 0
-
+deadEnemyCounter = 0
 #main game loop
 while running:
    
@@ -81,12 +81,13 @@ while running:
     
         if bulletHere:
             bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
-    
         #create player model and update movement
         playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
         g.makeRect(THEME1[0],playerXY,playerSize,screen)
-        if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1]):
+        if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
             running = False
+        
+     
         pygame.display.flip()  
         #updates entire screen
     
