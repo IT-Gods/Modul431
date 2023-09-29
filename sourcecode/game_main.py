@@ -95,6 +95,9 @@ while running:
         if not bulletHere:
             enemyDead = g.rowDead(enemyDead,enemyAlive)
             enemyLowest = g.updateLowest(enemyLowest,enemyAlive)
+        if enemyDead[1] == 0:
+            running = False
+
 
     
 
@@ -114,13 +117,19 @@ while running:
 
     if bullet1Here:
         bullet1 = g.updateFire(THEME1[1],bullet1,bulletSize,screen,0.2)
-        bullet1Here = g.enemyBulletBorderCollision(bullet1, DISPLAY_SIZE)
+        bullet1Here = g.enemyBulletBorderCollision(bullet1, playgroundSafeArea)
+        if running:
+            running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
     if bullet2Here:
         bullet2 = g.updateFire(THEME1[1],bullet2,bulletSize,screen,0.2)
-        bullet2Here = g.enemyBulletBorderCollision(bullet2, DISPLAY_SIZE)
+        bullet2Here = g.enemyBulletBorderCollision(bullet2, playgroundSafeArea)
+        if running:
+            running = g.collisionPlayerDeath(playerXY, playerSize, bullet2, bulletSize)
     if bullet3Here:
         bullet3 = g.updateFire(THEME1[1],bullet3,bulletSize,screen,0.2)
-        bullet3Here = g.enemyBulletBorderCollision(bullet3, DISPLAY_SIZE)
+        bullet3Here = g.enemyBulletBorderCollision(bullet3, playgroundSafeArea)
+        if running:
+            running = g.collisionPlayerDeath(playerXY, playerSize, bullet3, bulletSize)
 
 
 

@@ -104,6 +104,12 @@ def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope,enem
     else:
        return enemyXY[1] >  playerZone - playerSize[1]
 
+def collisionPlayerDeath(xyPlayer,sizePlayer, xyBullet, sizeBullet ):
+    if xyBullet[0] > (xyPlayer[0])-sizeBullet[0] and xyBullet[0] < (xyPlayer[0]+ sizePlayer[0]):
+        if xyBullet[1] > (xyPlayer[1])-sizeBullet[1] and xyBullet[1] < (xyPlayer[1]+ sizePlayer[1]):
+            return False
+    return True
+
 
 def detectDeadRow(enemyAlive):
       counter = 0
@@ -131,7 +137,7 @@ def enemyFire(xyEnemy,distEnemy,sizeEnemy,lowestEnemy,sizeBullet,color,screen):
     return xy , True
 
 def enemyBulletBorderCollision(xyBullet,screenSize):
-    if xyBullet[1] > screenSize[1]:
+    if xyBullet[1] > screenSize[1][1] - screenSize[0][1]:
         return False
     else:
         return True
