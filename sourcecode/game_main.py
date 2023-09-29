@@ -95,7 +95,7 @@ while running:
         if not bulletHere:
             enemyDead = g.rowDead(enemyDead,enemyAlive)
             enemyLowest = g.updateLowest(enemyLowest,enemyAlive)
-        if enemyDead[1] == 0:
+        if enemyDead[1] == 0: #victory condition
             running = False
 
 
@@ -115,16 +115,20 @@ while running:
             bullet1 , bullet1Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
         counter = 0
 
+
+# bullet events for enemies 
     if bullet1Here:
         bullet1 = g.updateFire(THEME1[1],bullet1,bulletSize,screen,0.2)
         bullet1Here = g.enemyBulletBorderCollision(bullet1, playgroundSafeArea)
-        if running:
+        if running: #this is a lose condition with bullet collision
             running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
+
     if bullet2Here:
         bullet2 = g.updateFire(THEME1[1],bullet2,bulletSize,screen,0.2)
         bullet2Here = g.enemyBulletBorderCollision(bullet2, playgroundSafeArea)
         if running:
             running = g.collisionPlayerDeath(playerXY, playerSize, bullet2, bulletSize)
+
     if bullet3Here:
         bullet3 = g.updateFire(THEME1[1],bullet3,bulletSize,screen,0.2)
         bullet3Here = g.enemyBulletBorderCollision(bullet3, playgroundSafeArea)
@@ -136,6 +140,8 @@ while running:
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
     g.makeRect(THEME1[0],playerXY,playerSize,screen)
+
+    #lose condition on enemy collision
     if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
         running = False
     

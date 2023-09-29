@@ -1,6 +1,143 @@
 import pygame
 import random
 
+#first implementation of classes for all rectangles
+class Rectangle:
+    
+    
+
+
+
+    def __init__(self ,x , y , xSize, ySize, color):
+        self.coordinate = [x, y]
+        self.size = [xSize, ySize]
+        self.color = color
+        self.alive = True
+    
+
+    def moveX(magnitude, direction):
+        self.coordinate[0] +=magnitude*direction
+        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
+        pygame.draw.rect(screen,self.color,self.rect)
+
+
+    def moveY(magnitude, direction):
+        self.coordinate[1] +=magnitude*direction
+        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
+        pygame.draw.rect(screen,self.color,self.rect)
+
+
+
+
+class Character(Rectangle):
+    
+
+    def __init__(self ,x , y , xSize, ySize, color):
+        super().__init__(x , y , xSize, ySize, color)
+
+
+    def fire(xyBullet , xySizeBullet, colorBullet)
+        self.bullet = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
+
+
+class Player(Character):
+    def __init__(self ,x , y , xSize, ySize, color, lives):
+        super().__init__(x , y , xSize, ySize, color)
+        self.lives = lives
+
+
+    def calcMiddle(bulletSize):
+        return [self.coordinate[0]+self.size[0]/2-(bulletSize[0]/2),self.coordinate[1]-self.size[1]/2]
+    
+
+
+
+
+
+class Enemies(Character):
+
+
+    def __init__(self ,x , y , xSize, ySize, color, shooterEnemy):
+        super().__init__(x , y , xSize, ySize, color)
+        self.aliveInividual = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
+                              [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
+        self.shooterEnemy = [4,4,4,4,4,4,4,4,4,4]
+        self.deadColumn = [0,9]
+        self.deadRow = 0
+        self.direction = 1
+
+        self.dist = [self.size[0] / 1.2, self.size[1] / 1.2] 
+
+    def rowDead:
+        currRow = len(self.aliveIndividual[0]) - self.deadRow -1
+        for row in range(len(enemyAlive[column]-1)):
+            if not self.aliveIndividual[column][currRow]:
+                self.deadRow += 1
+
+    def columnDead:
+        counter = 0
+        for i in range(len(self.aliveIndividual[self.deadColumn[0]])):
+            if not self.aliveIndividual[self.deadColumn[0]][i]:
+                counter += 1
+        if counter == len(self.aliveIndividual[0]) and self.deadColumn[0] < 9:
+            deadEnemy[0] += 1
+            
+        counter = 0
+        for i in range(len(self.aliveIndividual[self.deadColumn[1]])):
+            if not self.aliveIndividual[self.deadColumn[1]][i]:
+                counter += 1
+        if counter == len(self.aliveIndividual[0]) and self.deadColumn[1] > 0:
+            deadEnemy[1] -= 1
+     
+
+    def collisionWall(safeArea):
+        xyTopRight[0] = self.coordinate[0] + (10 * self.size[0]) + (9 * enemyDist[0]) 
+        xyTopRight[1] = XY[1]
+
+
+        if self.coordinates[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
+            self.coordinates[1] += 10
+            self.direction = 1
+        elif xyTopRight[0] - (self.size[0]+ self.dist[0])*(10 -self.deadColumn[1]) > safeArea[1][0] - (safeArea[0][0]):
+            self.coordinates[1] += 10
+            self.direction = -1
+
+        def 
+
+#fix later
+def makeEnemies(color,XY,sizeWH,screen, arr, dist):
+    for enemiesRow in range(len(arr)):
+        for enemiesColumn in range(len(arr[enemiesRow])):
+            if arr[enemiesRow][enemiesColumn]:
+                makeRect(color, XY , sizeWH, screen)
+            XY[1] += dist[1] + sizeWH[1]
+        XY[0] += dist[0] + sizeWH[0] 
+        XY[1] -= dist[1] * 4 + sizeWH[1] * 4  
+    XY[0] -= dist[0] * 10 + sizeWH[0] * 10 
+
+
+
+
+
+#function keeps track of how many column of enemies are alive
+def columnDead(deadEnemy,aliveEnemy):
+    counter = 0
+    for i in range(0,len(aliveEnemy[deadEnemy[0]-1])):
+        if not aliveEnemy[deadEnemy[0]][i]:
+            counter += 1
+    if counter == 4 and deadEnemy[0] < 9:
+        deadEnemy[0] += 1
+        
+    counter = 0
+    for i in range(0,len(aliveEnemy[deadEnemy[1]-1])):
+        if not aliveEnemy[deadEnemy[1]-1][i]:
+            counter += 1
+    if counter == 4 and deadEnemy[1] > 0:
+        deadEnemy[1] -= 1
+    return deadEnemy
+
+
+
 #collection of functions used in the game
 
 
@@ -21,11 +158,6 @@ def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
 
 
 
-#function to update fire and detect collision returns new coordinates of bullet
-def updateFire(color,XY,sizeWH,screen,direction):
-    XY[1] +=1*direction
-    makeRect(color,XY,sizeWH,screen)
-    return XY
 
 
 def detectCollisionBorder(XY,sizeWH,screenSize):
@@ -37,6 +169,8 @@ def detectCollisionBorder(XY,sizeWH,screenSize):
     else: 
         return True
 
+
+#collision detection for enemies and player bullets
 def detectCollisionEnemies(XYBullet,sizeBullet,XYEnemy,sizeEnemy,distEnemy,aliveEnemy):
     for column in range(len(aliveEnemy)):
         for row in range(len(aliveEnemy[column])):
@@ -71,6 +205,8 @@ def moveEnemiesX(xyEnemies, directionEnemies):
     xyEnemies[0] += 0.2*directionEnemies     
     return xyEnemies
 
+#funtion for controlling whether enemies hit a wall and change direction based on 
+#which wall was hit
 def collisionEnemies(xyEnemies,xyTopRight,enemyDir,sizeEnemy,distEnemy,deadEnemy, safeArea):
     if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < safeArea[0][0] - 5:
         xyEnemies[1] += 10
@@ -80,7 +216,9 @@ def collisionEnemies(xyEnemies,xyTopRight,enemyDir,sizeEnemy,distEnemy,deadEnemy
         enemyDir = -1
     return xyEnemies , enemyDir
 
-def rowDead(deadEnemy,aliveEnemy):
+
+#function keeps track of how many column of enemies are alive
+def columnDead(deadEnemy,aliveEnemy):
     counter = 0
     for i in range(0,len(aliveEnemy[deadEnemy[0]-1])):
         if not aliveEnemy[deadEnemy[0]][i]:
@@ -104,15 +242,17 @@ def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope,enem
     else:
        return enemyXY[1] >  playerZone - playerSize[1]
 
-def collisionPlayerDeath(xyPlayer,sizePlayer, xyBullet, sizeBullet ):
-    if xyBullet[0] > (xyPlayer[0])-sizeBullet[0] and xyBullet[0] < (xyPlayer[0]+ sizePlayer[0]):
-        if xyBullet[1] > (xyPlayer[1])-sizeBullet[1] and xyBullet[1] < (xyPlayer[1]+ sizePlayer[1]):
-            return False
-    return True
+#Standard function for detecting collision between two rectangles
+#objects should be 2x1 array in following order 
+#(coordinate1, size1 ,coordinate2, size2) 
+def collisionRect(xyObject1,sizeObject1, xyObject2, sizeObject2 ):
+    if xyObject2[0] > (xyObject1[0])-sizeObject2[0] and xyObject2[0] < (xyObject1[0]+ sizeObject1[0]):
+        if xyObject2[1] > (xyObject1[1])-sizeObject2[1] and xyObject2[1] < (xyObject1[1]+ sizeObject1[1]):
+            return True
+    return False
 
 
 def detectDeadRow(enemyAlive):
-      counter = 0
       for row in range(len(enemyAlive)):
         for column in range(len(enemyAlive[row])):
             if not enemyAlive[row][column]:
