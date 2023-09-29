@@ -42,6 +42,8 @@ enemyDir = 1
 enemyDead = [0,10]
 counter = 0
 bullet1Here = False
+bullet2Here = False
+bullet3Here = False
 
 #bullet directions
 bulletUp = -1
@@ -92,12 +94,26 @@ while running:
 
 
     counter += 1
-    if counter == 2000:
-        bullet1 , bullet1Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
+    if counter == 1000:
+        if bullet2Here and not bullet3Here:
+            bullet3 , bullet3Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
+        elif bullet1Here and not bullet2Here:
+            bullet2 , bullet2Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
+        elif not  bullet1Here:
+            bullet1 , bullet1Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
         counter = 0
 
     if bullet1Here:
         bullet1 = g.updateFire(THEME1[1],bullet1,bulletSize,screen,0.2)
+        bullet1Here = g.enemyBulletBorderCollision(bullet1, DISPLAY_SIZE)
+    if bullet2Here:
+        bullet2 = g.updateFire(THEME1[1],bullet2,bulletSize,screen,0.2)
+        bullet2Here = g.enemyBulletBorderCollision(bullet2, DISPLAY_SIZE)
+    if bullet3Here:
+        bullet3 = g.updateFire(THEME1[1],bullet3,bulletSize,screen,0.2)
+        bullet3Here = g.enemyBulletBorderCollision(bullet3, DISPLAY_SIZE)
+
+
 
     #create player model and update movement
     playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 

@@ -110,7 +110,12 @@ def enemyFire(xyEnemy,distEnemy,sizeEnemy,lowestEnemy,sizeBullet,color,screen):
     makeRect(color ,xy ,sizeBullet,screen)
     return xy , True
 
-    
+def enemyBulletBorderCollision(xyBullet,screenSize):
+    if xyBullet[1] > screenSize[1]:
+        return False
+    else:
+        return True
+
 
 
 
