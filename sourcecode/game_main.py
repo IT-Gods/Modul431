@@ -48,48 +48,46 @@ bulletDown = 1
 #general vars
 enemiesRow = 0
 enemiesColumn = 0
-
+deadEnemyCounter = 0
 #main game loop
 while running:
    
 
-    
-    pressed = pygame.key.get_pressed()
-  
-    g.make_playground(screen,DISPLAY_SIZE,THEME1, playgroundSafeAreas[0],playgroundSafeAreas[1] )
-    for event in pygame.event.get():
-        if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
-            running = False
-        if event.type == pygame.QUIT:
-            running = False
-        if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
-            if bulletHere == False:                 #checks if bullet on screen
-                bulletXY=[playerXY[0]+playerSize[0]/2-(bulletSize[0]/2),playerXY[1]-playerSize[1]/2]
-                bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
-                bulletHere = True
-    # Implement the enemies
-    xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
-    xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir,enemySize,enemyDist,enemyDead, playgroundSafeAreas)
-
-    
-    g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
-
-  
-
-
-            
-    if bulletHere:  #moves bullet if present and checks collision
-        g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
-        bulletHere = g.detectCollisionEnemies(bulletXY,bulletSize,enemyXY,enemySize,enemyDist,enemyAlive)
-    enemyDead = g.rowDead(enemyDead,enemyAlive)
-
-
-    if bulletHere:
-        bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
-
-    #create player model and update movement
-    playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
-    g.makeRect(THEME1[0],playerXY,playerSize,screen)
-    pygame.display.flip()  
    
-                    #updates entire screen
+        pressed = pygame.key.get_pressed()
+    
+        g.make_playground(screen,DISPLAY_SIZE,THEME1, playgroundSafeAreas[0],playgroundSafeAreas[1] )
+        for event in pygame.event.get():
+            if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
+                running = False
+            if event.type == pygame.QUIT:
+                running = False
+            if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
+                if bulletHere == False:                 #checks if bullet on screen
+                    bulletXY=[playerXY[0]+playerSize[0]/2-(bulletSize[0]/2),playerXY[1]-playerSize[1]/2]
+                    bulletXY = g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
+                    bulletHere = True
+        # Implement the enemies
+        xyEnemy= g.moveEnemiesX(enemyXY,enemyDir)
+        xyEnemy , enemyDir = g.collisionEnemies(enemyXY,g.calculateXTopRight(enemyXY,enemySize,enemyDist),DISPLAY_SIZE,enemyDir,enemySize,enemyDist,enemyDead, playgroundSafeAreas)
+    
+        
+        g.makeEnemies(THEME1[3],enemyXY, enemySize, screen,enemyAlive ,enemyDist)
+        if bulletHere:  #moves bullet if present and checks collision
+            g.updateFire(THEME1[1],bulletXY,bulletSize,screen,bulletUp)
+            bulletHere = g.detectCollisionEnemies(bulletXY,bulletSize,enemyXY,enemySize,enemyDist,enemyAlive)
+        enemyDead = g.rowDead(enemyDead,enemyAlive)
+    
+    
+        if bulletHere:
+            bulletHere = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
+        #create player model and update movement
+        playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
+        g.makeRect(THEME1[0],playerXY,playerSize,screen)
+        if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
+            running = False
+        
+     
+        pygame.display.flip()  
+        #updates entire screen
+    
