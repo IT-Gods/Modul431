@@ -14,14 +14,18 @@ class Rectangle:
         self.color = color
         self.alive = True
     
+    
+    def makeRect(self):
+        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
+        pygame.draw.rect(screen,self.color,self.rect)
 
-    def moveX(magnitude, direction):
+    def moveX(self, magnitude, direction):
         self.coordinate[0] +=magnitude*direction
         self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
         pygame.draw.rect(screen,self.color,self.rect)
 
 
-    def moveY(magnitude, direction):
+    def moveY(self, magnitude, direction):
         self.coordinate[1] +=magnitude*direction
         self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
         pygame.draw.rect(screen,self.color,self.rect)
@@ -36,7 +40,7 @@ class Character(Rectangle):
         super().__init__(x , y , xSize, ySize, color)
 
 
-    def fire(xyBullet , xySizeBullet, colorBullet)
+    def fire(self, xyBullet , xySizeBullet, colorBullet):
         self.bullet = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
 
 
@@ -46,7 +50,7 @@ class Player(Character):
         self.lives = lives
 
 
-    def calcMiddle(bulletSize):
+    def calcMiddle(self, bulletSize):
         return [self.coordinate[0]+self.size[0]/2-(bulletSize[0]/2),self.coordinate[1]-self.size[1]/2]
     
 
@@ -57,8 +61,9 @@ class Player(Character):
 class Enemies(Character):
 
 
-    def __init__(self ,x , y , xSize, ySize, color, shooterEnemy):
+    def __init__(self ,x , y , xSize, ySize, color):
         super().__init__(x , y , xSize, ySize, color)
+        #i hate this definition make better if possible moray
         self.aliveInividual = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
                               [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
         self.shooterEnemy = [4,4,4,4,4,4,4,4,4,4]
@@ -67,14 +72,15 @@ class Enemies(Character):
         self.direction = 1
 
         self.dist = [self.size[0] / 1.2, self.size[1] / 1.2] 
-
-    def rowDead:
+    
+    #this good
+    def rowDead(self):
         currRow = len(self.aliveIndividual[0]) - self.deadRow -1
         for row in range(len(enemyAlive[column]-1)):
             if not self.aliveIndividual[column][currRow]:
                 self.deadRow += 1
-
-    def columnDead:
+    #this also good
+    def columnDead(self):
         counter = 0
         for i in range(len(self.aliveIndividual[self.deadColumn[0]])):
             if not self.aliveIndividual[self.deadColumn[0]][i]:
@@ -89,8 +95,8 @@ class Enemies(Character):
         if counter == len(self.aliveIndividual[0]) and self.deadColumn[1] > 0:
             deadEnemy[1] -= 1
      
-
-    def collisionWall(safeArea):
+    #i am too monkey rn to check if this is good
+    def collisionWall(self, safeArea):
         xyTopRight[0] = self.coordinate[0] + (10 * self.size[0]) + (9 * enemyDist[0]) 
         xyTopRight[1] = XY[1]
 
@@ -102,43 +108,33 @@ class Enemies(Character):
             self.coordinates[1] += 10
             self.direction = -1
 
-        def 
 
-#fix later
-def makeEnemies(color,XY,sizeWH,screen, arr, dist):
-    for enemiesRow in range(len(arr)):
-        for enemiesColumn in range(len(arr[enemiesRow])):
-            if arr[enemiesRow][enemiesColumn]:
-                makeRect(color, XY , sizeWH, screen)
-            XY[1] += dist[1] + sizeWH[1]
-        XY[0] += dist[0] + sizeWH[0] 
-        XY[1] -= dist[1] * 4 + sizeWH[1] * 4  
-    XY[0] -= dist[0] * 10 + sizeWH[0] * 10 
+        #shit is now fixed
+        def makeEnemies(self):
+            for enemiesRow in range(len(arr)):
+                for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
+                    if self.aliveIndividual[enemiesRow][enemiesColumn]:
+                        self.makeRect(self)
+                    self.coordinate[1] += self.dist[1] + self.size[1]
+                self.coordinate[0] += self.dist[0] + self.size[0] 
+                self.coordinate[1] -= self.dist[1] * 4 + self.size[1] * 4  
+            self.coordinate[0] -= self.dist[0] * 10 + self.size[0] * 10 
 
+# moray you fucking ape this is ineffiecient just check lowest enemies
+        def updateLowest(self,lowestEnemy,aliveEnemy):
+            for enemiesRow in range(len(self.aliveIndividual)):
+                x = 0
+                for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
+                    if self.aliveIndividual[enemiesRow][enemiesColumn] and enemiesColumn + 1 > x:
+                        x = enemiesColumn + 1
+                        self.shooterEnemy[enemiesRow] = x
 
-
-
-
-#function keeps track of how many column of enemies are alive
-def columnDead(deadEnemy,aliveEnemy):
-    counter = 0
-    for i in range(0,len(aliveEnemy[deadEnemy[0]-1])):
-        if not aliveEnemy[deadEnemy[0]][i]:
-            counter += 1
-    if counter == 4 and deadEnemy[0] < 9:
-        deadEnemy[0] += 1
-        
-    counter = 0
-    for i in range(0,len(aliveEnemy[deadEnemy[1]-1])):
-        if not aliveEnemy[deadEnemy[1]-1][i]:
-            counter += 1
-    if counter == 4 and deadEnemy[1] > 0:
-        deadEnemy[1] -= 1
-    return deadEnemy
+#add some random function for shooting or some shit just make it work
 
 
 
 #collection of functions used in the game
+#half of these will need to be deleted if possible only leave collision
 
 
 
