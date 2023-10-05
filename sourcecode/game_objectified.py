@@ -119,7 +119,7 @@ while running:
         player1.bullet.alive = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
 #FIXED TILL HERE I GUESS
 #I WANT TO DIE
-
+#ACKACKACKACK HOW TF DO I FIX THIS
     counter += 1
     if counter == 1000:
         if bullet2Here and not bullet3Here:
