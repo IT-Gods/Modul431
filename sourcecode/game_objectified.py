@@ -2,8 +2,8 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-
 import utils.functions as g
+
 DISPLAY_SIZE = [1280,720]
 
 pygame.init()
@@ -115,19 +115,19 @@ while running:
 
     
 
-    if bulletHere:
-        player1.bullet.alive = g.detectCollisionBorder(bulletXY,bulletSize,DISPLAY_SIZE)
+    if player1.bullet1.alive:
+        player1.bullet1.alive = g.detectCollisionBorder(player1.bullet1.coordinate,player1.bullet1.size,DISPLAY_SIZE)
 #FIXED TILL HERE I GUESS
 #I WANT TO DIE
 #ACKACKACKACK HOW TF DO I FIX THIS
     counter += 1
     if counter == 1000:
-        if bullet2Here and not bullet3Here:
-            bullet3 , bullet3Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
-        elif bullet1Here and not bullet2Here:
-            bullet2 , bullet2Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
-        elif not  bullet1Here:
-            bullet1 , bullet1Here = g.enemyFire(enemyXY,enemyDist,enemySize,enemyLowest,bulletSize,THEME1[1],screen)
+        if enemy.bullet2.alive and not enemy.bullet3.alive:
+            enemy.bullet3.moveY(-1, 0.2)
+        elif enemy.bullet1.alive and not enemy.bullet2.alive:
+                enemy.bullet2.moveY(1, 0.2)
+        elif not  enemy.bullet1.alive:
+            enemy.bullet1.moveY(1, 0.2) 
         counter = 0
 
 

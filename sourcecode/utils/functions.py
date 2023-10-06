@@ -1,11 +1,9 @@
 import pygame
 import random
 
+
 #first implementation of classes for all rectangles
 class Rectangle:
-    
-    
-
 
 
     def __init__(self ,x , y , xSize, ySize, color):
@@ -15,33 +13,35 @@ class Rectangle:
         self.alive = True
     
     
-    def makeRect(self):
-        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
+    def makeRect(self, screen):
+        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.size[0],self.size[1])
         pygame.draw.rect(screen,self.color,self.rect)
 
-    def moveX(self, magnitude, direction):
+    def moveX(self, magnitude, direction, screen):
         self.coordinate[0] +=magnitude*direction
-        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
-        pygame.draw.rect(screen,self.color,self.rect)
+        makeRect(screen)
 
 
-    def moveY(self, magnitude, direction):
+    def moveY(self, magnitude, direction, screen):
         self.coordinate[1] +=magnitude*direction
-        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.sizesize[0],self.size[1])
-        pygame.draw.rect(screen,self.color,self.rect)
+        makeRect(screen)
 
 
 
 
 class Character(Rectangle):
     
-
     def __init__(self ,x , y , xSize, ySize, color):
         super().__init__(x , y , xSize, ySize, color)
 
+    def fire1(self, xyBullet , xySizeBullet, colorBullet):
+        self.bullet1 = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
 
-    def fire(self, xyBullet , xySizeBullet, colorBullet):
-        self.bullet = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
+    def fire2(self, xyBullet , xySizeBullet, colorBullet):
+        self.bullet2 = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
+
+    def fire3(self, xyBullet , xySizeBullet, colorBullet):
+        self.bullet3 = Rectangle(xyBullet[0], xyBullet[1], xySizeBullet[0], xySizeBullet[1], colorBullet)
 
 
 class Player(Character):
@@ -55,9 +55,6 @@ class Player(Character):
     
 
 
-
-
-
 class Enemies(Character):
 
 
@@ -68,17 +65,20 @@ class Enemies(Character):
                               [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
         self.shooterEnemy = [4,4,4,4,4,4,4,4,4,4]
         self.deadColumn = [0,9]
-        self.deadRow = 0
+        self.deadRow = 4
         self.direction = 1
 
         self.dist = [self.size[0] / 1.2, self.size[1] / 1.2] 
     
     #this good
     def rowDead(self):
-        currRow = len(self.aliveIndividual[0]) - self.deadRow -1
-        for row in range(len(enemyAlive[column]-1)):
-            if not self.aliveIndividual[column][currRow]:
-                self.deadRow += 1
+        counter = 0
+        for row in range(len(self.aliveInividual[self.deadRow])):
+            if not self.aliveIndividual[self.deadRow][row]:
+                counter += 1
+        if counter == 10:
+            self.deadRow -= 1
+
     #this also good
     def columnDead(self):
         counter = 0
@@ -86,31 +86,37 @@ class Enemies(Character):
             if not self.aliveIndividual[self.deadColumn[0]][i]:
                 counter += 1
         if counter == len(self.aliveIndividual[0]) and self.deadColumn[0] < 9:
-            deadEnemy[0] += 1
+            self.deadColumn[0] += 1
             
         counter = 0
         for i in range(len(self.aliveIndividual[self.deadColumn[1]])):
             if not self.aliveIndividual[self.deadColumn[1]][i]:
                 counter += 1
         if counter == len(self.aliveIndividual[0]) and self.deadColumn[1] > 0:
-            deadEnemy[1] -= 1
+            self.deadColumn[1] -= 1
+
+    def topRight(self):
+        firstElement = self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) 
+        secondElement = self.coordinate[1]
+        return [firstElement, secondElement]    
      
     #i am too monkey rn to check if this is good
     def collisionWall(self, safeArea):
-        xyTopRight[0] = self.coordinate[0] + (10 * self.size[0]) + (9 * enemyDist[0]) 
-        xyTopRight[1] = XY[1]
+        arr = self.topRight
+        arr[0] = self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) 
+        arr[1] = self.coordinate[1]
 
 
-        if self.coordinates[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
-            self.coordinates[1] += 10
+        if self.coordinate[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
+            self.coordinate[1] += 10
             self.direction = 1
-        elif xyTopRight[0] - (self.size[0]+ self.dist[0])*(10 -self.deadColumn[1]) > safeArea[1][0] - (safeArea[0][0]):
-            self.coordinates[1] += 10
+        elif arr[0] - (self.size[0]+ self.dist[0])*(10 -self.deadColumn[1]) > safeArea[1][0] - (safeArea[0][0]):
+            self.coordinate[1] += 10
             self.direction = -1
 
 
         #shit is now fixed
-        def makeEnemies(self):
+    def makeEnemies(self):
             for enemiesRow in range(len(arr)):
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
                     if self.aliveIndividual[enemiesRow][enemiesColumn]:
@@ -121,7 +127,7 @@ class Enemies(Character):
             self.coordinate[0] -= self.dist[0] * 10 + self.size[0] * 10 
 
 # moray you fucking ape this is ineffiecient just check lowest enemies
-        def updateLowest(self,lowestEnemy,aliveEnemy):
+    def updateLowest(self,lowestEnemy,aliveEnemy):
             for enemiesRow in range(len(self.aliveIndividual)):
                 x = 0
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
