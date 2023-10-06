@@ -19,12 +19,12 @@ class Rectangle:
 
     def moveX(self, magnitude, direction, screen):
         self.coordinate[0] +=magnitude*direction
-        makeRect(screen)
+        self.makeRect(screen)
 
 
     def moveY(self, magnitude, direction, screen):
         self.coordinate[1] +=magnitude*direction
-        makeRect(screen)
+        self.makeRect(screen)
 
 
 
@@ -61,7 +61,7 @@ class Enemies(Character):
     def __init__(self ,x , y , xSize, ySize, color):
         super().__init__(x , y , xSize, ySize, color)
         #i hate this definition make better if possible moray
-        self.aliveInividual = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
+        self.aliveIndividual = [[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],
                               [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
         self.shooterEnemy = [4,4,4,4,4,4,4,4,4,4]
         self.deadColumn = [0,9]
@@ -73,7 +73,7 @@ class Enemies(Character):
     #this good
     def rowDead(self):
         counter = 0
-        for row in range(len(self.aliveInividual[self.deadRow])):
+        for row in range(len(self.aliveIndividual[self.deadRow])):
             if not self.aliveIndividual[self.deadRow][row]:
                 counter += 1
         if counter == 10:
@@ -96,15 +96,12 @@ class Enemies(Character):
             self.deadColumn[1] -= 1
 
     def topRight(self):
-        firstElement = self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) 
-        secondElement = self.coordinate[1]
-        return [firstElement, secondElement]    
+        arr = [self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) ,self.coordinate[1]]
+        return arr
      
     #i am too monkey rn to check if this is good
     def collisionWall(self, safeArea):
-        arr = self.topRight
-        arr[0] = self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) 
-        arr[1] = self.coordinate[1]
+        arr = self.topRight()
 
 
         if self.coordinate[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
@@ -116,18 +113,18 @@ class Enemies(Character):
 
 
         #shit is now fixed
-    def makeEnemies(self):
-            for enemiesRow in range(len(arr)):
+    def makeEnemies(self,screen):
+            for enemiesRow in range(len(self.aliveIndividual)):
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
                     if self.aliveIndividual[enemiesRow][enemiesColumn]:
-                        self.makeRect(self)
+                        self.makeRect(screen)
                     self.coordinate[1] += self.dist[1] + self.size[1]
                 self.coordinate[0] += self.dist[0] + self.size[0] 
                 self.coordinate[1] -= self.dist[1] * 4 + self.size[1] * 4  
             self.coordinate[0] -= self.dist[0] * 10 + self.size[0] * 10 
 
 # moray you fucking ape this is ineffiecient just check lowest enemies
-    def updateLowest(self,lowestEnemy,aliveEnemy):
+    def updateLowest(self):
             for enemiesRow in range(len(self.aliveIndividual)):
                 x = 0
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
@@ -136,8 +133,10 @@ class Enemies(Character):
                         self.shooterEnemy[enemiesRow] = x
 
 #add some random function for shooting or some shit just make it work
-
-
+    def findShotPos(self):
+        randomNum = random.randint(1,10)
+        xy = [self.coordinate[0] + (randomNum - 1)*self.dist[0] +((randomNum)* self.size[0]) , self.coordinate[1] +(self.shooterEnemy[randomNum - 1] - 1)*self.dist[1] + (self.shooterEnemy[randomNum - 1]) * self.size[1]]
+        return xy
 
 #collection of functions used in the game
 #half of these will need to be deleted if possible only leave collision
@@ -145,9 +144,9 @@ class Enemies(Character):
 
 
 #create a rectangle is used as filler for models
-def makeRect(color,XY,sizeWH,screen):
-    myRect = pygame.Rect(XY[0],XY[1],sizeWH[0],sizeWH[1])
-    pygame.draw.rect(screen,color,myRect)
+#def makeRect(color,XY,sizeWH,screen):
+#    myRect = pygame.Rect(XY[0],XY[1],sizeWH[0],sizeWH[1])
+#    pygame.draw.rect(screen,color,myRect)
 
 
 #function to update player movement

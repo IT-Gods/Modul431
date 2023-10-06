@@ -65,10 +65,13 @@ deadEnemyCounter = 0
 
 
 #INSHALLAH MAKE OBJECTS
-player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], THEME[0], 3)
-player1.fire(player1.calcMiddle[0],player1.calcMiddle[1],bulletSize[0],bulletSize[1],THEME[1])
-player1.bullet.alive = False
-enemy = g.Enemy(enemyXY[0],enemyXY[1],enemySize[0],enemySize[1],THEME[0])
+player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], THEME1[0], 3)
+player1.fire1(player1.calcMiddle(bulletSize),bulletSize,THEME1[1])
+player1.bullet1.alive = False
+enemy = g.Enemies(enemyXY[0],enemyXY[1],enemySize[0],enemySize[1],THEME1[0])
+enemy.fire1([1,1],[1,1],THEME1[1])
+enemy.fire2([1,1],[1,1],THEME1[1])
+enemy.fire3([1,1],[1,1],THEME1[1])
 
 
 
@@ -88,21 +91,21 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
-            if player1.bullet.alive == False:                 #checks if bullet on screen
-                player1.bullet.moveY(1,-1)
-                player1.bullet.alive = True  
-    enemy.moveX(0.2,enemy.direction)
+            if player1.bullet1.alive == False:                 #checks if bullet on screen
+                player1.fire1(player1.calcMiddle(bulletSize),bulletSize,THEME1[1])
+                player1.bullet1.alive = True  
+    enemy.moveX(0.2,enemy.direction,screen)
     enemy.collisionWall(playgroundSafeArea)
 
-    enemy.makeEnemies()
+    enemy.makeEnemies(screen)
 
   
 
 
             
-    if player1.bullet.alive:  #moves bullet if present and checks collision
-        player1.bullet.moveY(1,1)
-        player1.bullet.alive = g.detectCollisionEnemies(player1.bullet.coordinate,player1.bullet.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
+    if player1.bullet1.alive:  #moves bullet if present and checks collision
+        player1.bullet1.moveY(-1,1,screen)
+        player1.bullet1.alive = g.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
         if not player1.bullet1.alive:
             enemy.rowDead()
             enemy.updateLowest()
@@ -119,46 +122,41 @@ while running:
         player1.bullet1.alive = g.detectCollisionBorder(player1.bullet1.coordinate,player1.bullet1.size,DISPLAY_SIZE)
 #FIXED TILL HERE I GUESS
 #I WANT TO DIE
-#ACKACKACKACK HOW TF DO I FIX THIS
     counter += 1
     if counter == 1000:
+    
         if enemy.bullet2.alive and not enemy.bullet3.alive:
-            enemy.bullet3.moveY(-1, 0.2)
+            enemy.fire3(enemy.findShotPos(),bulletSize,THEME1[1])
         elif enemy.bullet1.alive and not enemy.bullet2.alive:
-                enemy.bullet2.moveY(1, 0.2)
+                enemy.fire2(enemy.findShotPos(),bulletSize,THEME1[1])
         elif not  enemy.bullet1.alive:
-            enemy.bullet1.moveY(1, 0.2) 
+            enemy.fire1(enemy.findShotPos(),bulletSize,THEME1[1])
         counter = 0
 
 
 # bullet events for enemies 
-    if bullet1Here:
-        bullet1 = g.updateFire(THEME1[1],bullet1,bulletSize,screen,0.2)
-        bullet1Here = g.enemyBulletBorderCollision(bullet1, playgroundSafeArea)
-        if running: #this is a lose condition with bullet collision
-            running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
+    if enemy.bullet1.alive:
+        enemy.bullet1.moveY(1,0.2,screen)
+        enemy.bullet1.alive = g.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
+        #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
+            #running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
 
-    if bullet2Here:
-        bullet2 = g.updateFire(THEME1[1],bullet2,bulletSize,screen,0.2)
-        bullet2Here = g.enemyBulletBorderCollision(bullet2, playgroundSafeArea)
-        if running:
-            running = g.collisionPlayerDeath(playerXY, playerSize, bullet2, bulletSize)
+    if enemy.bullet2.alive:
+        enemy.bullet2.moveY(1,0.2,screen)
+        enemy.bullet2.alive = g.enemyBulletBorderCollision(enemy.bullet2.coordinate, playgroundSafeArea)
 
-    if bullet3Here:
-        bullet3 = g.updateFire(THEME1[1],bullet3,bulletSize,screen,0.2)
-        bullet3Here = g.enemyBulletBorderCollision(bullet3, playgroundSafeArea)
-        if running:
-            running = g.collisionPlayerDeath(playerXY, playerSize, bullet3, bulletSize)
+    if enemy.bullet3.alive:
+        enemy.bullet3.moveY(1,0.2,screen)
+        enemy.bullet3.alive = g.enemyBulletBorderCollision(enemy.bullet3.coordinate, playgroundSafeArea)
 
 
 
     #create player model and update movement
-    playerXY = g.updatePlayerXY(playerXY, playerSize,pressed,DISPLAY_SIZE) 
-    g.makeRect(THEME1[0],playerXY,playerSize,screen)
+    player1.makeRect(screen)
 
     #lose condition on enemy collision
-    if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
-        running = False
+  #  if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
+   #     running = False
     
     pygame.display.flip()  
 
