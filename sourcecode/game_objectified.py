@@ -2,7 +2,9 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
+import utils.Colors as c
 import utils.functions as g
+
 
 DISPLAY_SIZE = [1280,720]
 
@@ -15,12 +17,9 @@ running = True                                      #this should be obvious
 #MAKE ALL OF THIS GO AWAY INTO SOME OTHER FILE LET ME OUT
 #color definitions
 
-GREEN = pygame.Color(0,255,0)
-RED = pygame.Color(255,0,0)
-BLACK = pygame.Color(0,0,0)
-WHITE = pygame.Color(255,255,255)
+colorPalette = c.Colors()
 
-THEME1= [GREEN,RED,BLACK,WHITE]
+THEME1= [colorPalette.green(),colorPalette.red(),colorPalette.black(), colorPalette.white()]
 
 #definitions of ingame objects
 playerSize = [20,20]
