@@ -119,7 +119,7 @@ while running:
     
 
     if player1.bullet1.alive:
-        player1.bullet1.alive = g.detectCollisionBorder(player1.bullet1.coordinate,player1.bullet1.size,DISPLAY_SIZE)
+        player1.bullet1.alive = g.detectCollisionBorder(player1.bullet1.coordinate,DISPLAY_SIZE)
 #FIXED TILL HERE I GUESS
 #I WANT TO DIE
     counter += 1

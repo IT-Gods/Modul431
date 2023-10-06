@@ -107,7 +107,7 @@ class Enemies(Character):
         if self.coordinate[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
             self.coordinate[1] += 10
             self.direction = 1
-        elif arr[0] - (self.size[0]+ self.dist[0])*(10 -self.deadColumn[1]) > safeArea[1][0] - (safeArea[0][0]):
+        elif arr[0] - (self.size[0]+ self.dist[0])*(9 - self.deadColumn[1]) > safeArea[1][0]:
             self.coordinate[1] += 10
             self.direction = -1
 
@@ -161,7 +161,7 @@ def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
 
 
 
-def detectCollisionBorder(XY,sizeWH,screenSize):
+def detectCollisionBorder(XY,screenSize):
 
     if XY[0] == 0 or XY[0] == screenSize[0]:
         return False
