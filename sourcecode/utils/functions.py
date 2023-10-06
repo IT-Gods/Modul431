@@ -48,10 +48,19 @@ class Player(Character):
     def __init__(self ,x , y , xSize, ySize, color, lives):
         super().__init__(x , y , xSize, ySize, color)
         self.lives = lives
-
+        self.coordinate = [x,y]
+        self.size = [xSize, ySize]
 
     def calcMiddle(self, bulletSize):
         return [self.coordinate[0]+self.size[0]/2-(bulletSize[0]/2),self.coordinate[1]-self.size[1]/2]
+    
+
+    def movePlayer(self,pressed,displaySize, screen, borderMargin):
+        if pressed[pygame.K_LEFT] and self.coordinate[0] != borderMargin[0]:
+           return  self.moveX(0.5, -1, screen)
+        if pressed[pygame.K_RIGHT] and self.coordinate[0] + self.size[1] != displaySize[0] - borderMargin[0]:
+          return self.moveX(0.5, +1, screen)
+        
     
 
 
