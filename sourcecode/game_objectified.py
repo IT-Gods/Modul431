@@ -30,7 +30,7 @@ bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
 bulletHere = False
 
-borderMargin = [20, 20]
+borderMargin = [10, 10]
 
 playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
 
