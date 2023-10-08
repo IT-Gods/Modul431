@@ -2,10 +2,14 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-import utils.functions as g
+import utils.coreModule as g
+import utils.colors as c
+import utils.helpers as h
+
 
 DISPLAY_SIZE = [1280,720]
 
+colorpalette = c.colors()
 pygame.init()
 screen = pygame.display.set_mode((DISPLAY_SIZE[0],DISPLAY_SIZE[1]))       #Screen size
 clock = pygame.time.Clock()                         #time
@@ -15,13 +19,8 @@ running = True                                      #this should be obvious
 #MAKE ALL OF THIS GO AWAY INTO SOME OTHER FILE LET ME OUT
 #color definitions
 
-GREEN = pygame.Color(0,255,0)
-RED = pygame.Color(255,0,0)
-BLACK = pygame.Color(0,0,0)
-WHITE = pygame.Color(255,255,255)
 
-
-THEME1= [GREEN,RED,BLACK,WHITE]
+THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
 
 
 #definitions of ingame objects
@@ -121,7 +120,7 @@ while running:
     
 
     if player1.bullet1.alive:
-        player1.bullet1.alive = g.detectCollisionBorder(player1.bullet1.coordinate,DISPLAY_SIZE)
+        player1.bullet1.alive = h.detectCollisionBorder(player1.bullet1.coordinate,DISPLAY_SIZE)
 #FIXED TILL HERE I GUESS
 #I WANT TO DIE
     counter += 1
@@ -139,17 +138,17 @@ while running:
 # bullet events for enemies 
     if enemy.bullet1.alive:
         enemy.bullet1.moveY(1,0.2,screen)
-        enemy.bullet1.alive = g.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
+        enemy.bullet1.alive = h.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
         #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
             #running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
 
     if enemy.bullet2.alive:
         enemy.bullet2.moveY(1,0.2,screen)
-        enemy.bullet2.alive = g.enemyBulletBorderCollision(enemy.bullet2.coordinate, playgroundSafeArea)
+        enemy.bullet2.alive = h.enemyBulletBorderCollision(enemy.bullet2.coordinate, playgroundSafeArea)
 
     if enemy.bullet3.alive:
         enemy.bullet3.moveY(1,0.2,screen)
-        enemy.bullet3.alive = g.enemyBulletBorderCollision(enemy.bullet3.coordinate, playgroundSafeArea)
+        enemy.bullet3.alive = h.enemyBulletBorderCollision(enemy.bullet3.coordinate, playgroundSafeArea)
 
 
 
