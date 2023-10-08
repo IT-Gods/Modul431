@@ -3,7 +3,7 @@
 
 import pygame
 
-import utils.functions as g
+import coreModule as g
 DISPLAY_SIZE = [1280,720]
 
 pygame.init()
