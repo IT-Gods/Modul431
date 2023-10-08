@@ -19,6 +19,7 @@ running = True                                      #this should be obvious
 
 colorPalette = c.Colors()
 
+#shall we leave it like this or use directly the modul?
 THEME1= [colorPalette.green(),colorPalette.red(),colorPalette.black(), colorPalette.white()]
 
 #definitions of ingame objects

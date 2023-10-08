@@ -108,11 +108,8 @@ class Enemies(Character):
         arr = [self.coordinate[0] + (10 * self.size[0]) + (9 * self.dist[0]) ,self.coordinate[1]]
         return arr
      
-    #i am too monkey rn to check if this is good
     def collisionWall(self, safeArea):
         arr = self.topRight()
-
-
         if self.coordinate[0] + (self.size[0]+ self.dist[0])*self.deadColumn[0] < safeArea[0][0]:
             self.coordinate[1] += 10
             self.direction = 1
@@ -120,8 +117,6 @@ class Enemies(Character):
             self.coordinate[1] += 10
             self.direction = -1
 
-
-        #shit is now fixed
     def makeEnemies(self,screen):
             for enemiesRow in range(len(self.aliveIndividual)):
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
@@ -131,8 +126,7 @@ class Enemies(Character):
                 self.coordinate[0] += self.dist[0] + self.size[0] 
                 self.coordinate[1] -= self.dist[1] * 4 + self.size[1] * 4  
             self.coordinate[0] -= self.dist[0] * 10 + self.size[0] * 10 
-
-# moray you fucking ape this is ineffiecient just check lowest enemies
+   
     def updateLowest(self):
             for enemiesRow in range(len(self.aliveIndividual)):
                 x = 0
@@ -141,7 +135,7 @@ class Enemies(Character):
                         x = enemiesColumn + 1
                         self.shooterEnemy[enemiesRow] = x
 
-#add some random function for shooting or some shit just make it work
+#select shooter enemy randomly
     def findShotPos(self):
         randomNum = random.randint(1,10)
         xy = [self.coordinate[0] + (randomNum - 1)*self.dist[0] +((randomNum)* self.size[0]) , self.coordinate[1] +(self.shooterEnemy[randomNum - 1] - 1)*self.dist[1] + (self.shooterEnemy[randomNum - 1]) * self.size[1]]
@@ -164,7 +158,7 @@ class Enemies(Character):
 
 
 
-
+#what is this function?
 def detectCollisionBorder(XY,screenSize):
 
     if XY[0] == 0 or XY[0] == screenSize[0]:
@@ -188,7 +182,8 @@ def detectCollisionEnemies(XYBullet,sizeBullet,XYEnemy,sizeEnemy,distEnemy,alive
                         
                         
                 
-    return True
+    return Tru
+    
 
 
 
@@ -214,13 +209,8 @@ def columnDead(deadEnemy,aliveEnemy):
         deadEnemy[1] -= 1
     return deadEnemy
 
-def gameOver(playerXY, enemyXY, displayXY, playerSize, playerContainerScope,enemyDeadCounter, enemyDist, enemySize):
-    playerZone = displayXY[1] / 2 - (displayXY[1] - playerXY[1])  + playerContainerScope * playerSize[1]
 
-    if enemyDeadCounter >= 1:
-       return enemyXY[1] -  ((enemyDeadCounter * (enemySize[1] + enemyDist[1]) ) ) >  playerZone - playerSize[1]
-    else:
-       return enemyXY[1] >  playerZone - playerSize[1]
+
 
 #Standard function for detecting collision between two rectangles
 #objects should be 2x1 array in following order 
