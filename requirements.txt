@@ -5,7 +5,7 @@ idna==3.4
 pipreqs==0.4.13
 pygame==2.5.1
 requests==2.31.0
-urllib3==2.0.4
+urllib3==2.0.6
 yarg==0.1.9
 pygame-menu==2.3.3
 
