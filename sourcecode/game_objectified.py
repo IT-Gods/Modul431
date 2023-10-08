@@ -3,7 +3,7 @@
 
 import pygame
 import utils.Colors as c
-import coreModule as g
+import utils.functions as g
 
 
 DISPLAY_SIZE = [1280,720]

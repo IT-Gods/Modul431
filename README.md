@@ -22,7 +22,7 @@ source venv/bin/activate
    
 - Update the project dependencies ▶️
   ```
-  pip3 install -r reqiurements.txt
+  pip install -r reqiurements.txt
   
   ```
 

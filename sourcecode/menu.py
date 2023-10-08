@@ -1,5 +1,5 @@
 import pygame
-import coreModule as g
+import utils.functions as g
 
 pygame.init()                                   
 screen = pygame.display.set_mode((1280, 720))       #Screen size
