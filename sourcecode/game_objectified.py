@@ -106,7 +106,7 @@ while running:
             
     if player1.bullet1.alive:  #moves bullet if present and checks collision
         player1.bullet1.moveY(-1,1,screen)
-        player1.bullet1.alive = g.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
+        player1.bullet1.alive = h.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
         if not player1.bullet1.alive:
             enemy.rowDead()
             enemy.updateLowest()
