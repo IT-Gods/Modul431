@@ -95,8 +95,6 @@ class Enemies(Character):
         if counter == 10:
             self.deadRow += 1
         
-    
-
     #this also good
     def columnDead(self):
         counter = 0
