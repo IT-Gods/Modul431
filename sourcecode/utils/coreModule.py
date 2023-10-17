@@ -17,6 +17,13 @@ class Rectangle:
         self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.size[0],self.size[1])
         pygame.draw.rect(screen,self.color,self.rect)
 
+# this is a pseudo fix for the topleft rect bug
+    def moveXO(self, magnitude, direction):
+        self.coordinate[0] +=magnitude*direction
+
+    def moveYO(self, magnitude, direction):
+        self.coordinate[1] +=magnitude*direction
+
     def moveX(self, magnitude, direction, screen):
         self.coordinate[0] +=magnitude*direction
         self.makeRect(screen)

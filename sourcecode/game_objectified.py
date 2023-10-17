@@ -95,7 +95,8 @@ while running:
             if player1.bullet1.alive == False:                 #checks if bullet on screen
                 player1.fire1(player1.calcMiddle(bulletSize),bulletSize,THEME1[1])
                 player1.bullet1.alive = True  
-    enemy.moveX(0.2,enemy.direction,screen)
+    enemy.moveXO(0.2,enemy.direction)
+    # found the bug this also draws a rect by default so make it seperately
     enemy.collisionWall(playgroundSafeArea)
 
     enemy.makeEnemies(screen)
