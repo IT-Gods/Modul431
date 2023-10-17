@@ -1,25 +1,11 @@
 import pygame
 
-#collection of functions used in the game
-#half of these will need to be deleted if possible only leave collision
-
-
-
-#create a rectangle is used as filler for models
-#def makeRect(color,XY,sizeWH,screen):
-#    myRect = pygame.Rect(XY[0],XY[1],sizeWH[0],sizeWH[1])
-#    pygame.draw.rect(screen,color,myRect)
-
-
-#function to update player movement
-def updatePlayerXY(playerXY, playerSize,pressed,displaySize):
-    if pressed[pygame.K_LEFT] and playerXY[0] != 0:
-        playerXY[0] -= 0.5
-    if pressed[pygame.K_RIGHT] and playerXY[0] + playerSize[1] != displaySize[0] :
-        playerXY[0] += 0.5
-    return playerXY
-
-
+def gameOver(enemyXY, displayXY, playerSize,deadRow, enemyDist, enemySize):
+    playerZone = displayXY[1] / 2 - playerSize[1] 
+    if  deadRow >= 1:
+       return enemyXY[1] -  ((deadRow * (enemySize[1] + enemyDist[1]) ) ) >  playerZone 
+    else:
+       return enemyXY[1] >  playerZone 
 
 
 #what is this function?
@@ -48,43 +34,30 @@ def detectCollisionEnemies(XYBullet,sizeBullet,XYEnemy,sizeEnemy,distEnemy,alive
     return True
                         
                         
-                
-   
-    
-
-def makeEnemies(color,XY,sizeWH,screen, arr, dist):
-    for enemiesRow in range(len(arr)):
-        for enemiesColumn in range(len(arr[enemiesRow])):
-            if arr[enemiesRow][enemiesColumn]:
-                makeRect(color, XY , sizeWH, screen)
-            XY[1] += dist[1] + sizeWH[1]
-        XY[0] += dist[0] + sizeWH[0] 
-        XY[1] -= dist[1] * 4 + sizeWH[1] * 4  
-    XY[0] -= dist[0] * 10 + sizeWH[0] * 10 
 
 
-def calculateXTopRight(XY,enemySize, enemyDist):
-   firstElement = XY[0] + (10 * enemySize[0]) + (9 * enemyDist[0]) 
-   secondElement = XY[1]
-   return [firstElement, secondElement]     #i dont like how this is returned
+# def calculateXTopRight(XY,enemySize, enemyDist):
+#    firstElement = XY[0] + (10 * enemySize[0]) + (9 * enemyDist[0]) 
+#    secondElement = XY[1]
+#    return [firstElement, secondElement]     #i dont like how this is returned
 
-def moveEnemiesX(xyEnemies, directionEnemies):
-    xyEnemies[0] += 0.2*directionEnemies     
-    return xyEnemies
+# def moveEnemiesX(xyEnemies, directionEnemies):
+#     xyEnemies[0] += 0.2*directionEnemies     
+#     return xyEnemies
 
 #funtion for controlling whether enemies hit a wall and change direction based on 
 #which wall was hit
-def collisionEnemies(xyEnemies,xyTopRight,enemyDir,sizeEnemy,distEnemy,deadEnemy, safeArea):
-    if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < safeArea[0][0] - 5:
-        xyEnemies[1] += 10
-        enemyDir = 1
-    elif xyTopRight[0] - (sizeEnemy[0]+distEnemy[0])*(10 -deadEnemy[1]) > safeArea[1][0] - (safeArea[0][0] - 5):
-        xyEnemies[1] += 10
-        enemyDir = -1
-    return xyEnemies , enemyDir
+# def collisionEnemies(xyEnemies,xyTopRight,enemyDir,sizeEnemy,distEnemy,deadEnemy, safeArea):
+#     if xyEnemies[0] + (sizeEnemy[0]+distEnemy[0])*deadEnemy[0] < safeArea[0][0] - 5:
+#         xyEnemies[1] += 10
+#         enemyDir = 1
+#     elif xyTopRight[0] - (sizeEnemy[0]+distEnemy[0])*(10 -deadEnemy[1]) > safeArea[1][0] - (safeArea[0][0] - 5):
+#         xyEnemies[1] += 10
+#         enemyDir = -1
+#     return xyEnemies , enemyDir
 
 
-#function keeps track of how many column of enemies are alive
+# #function keeps track of how many column of enemies are alive
 def columnDead(deadEnemy,aliveEnemy):
     counter = 0
     for i in range(0,len(aliveEnemy[deadEnemy[0]-1])):
@@ -107,36 +80,36 @@ def columnDead(deadEnemy,aliveEnemy):
 #Standard function for detecting collision between two rectangles
 #objects should be 2x1 array in following order 
 #(coordinate1, size1 ,coordinate2, size2) 
-def collisionRect(xyObject1,sizeObject1, xyObject2, sizeObject2 ):
-    if xyObject2[0] > (xyObject1[0])-sizeObject2[0] and xyObject2[0] < (xyObject1[0]+ sizeObject1[0]):
-        if xyObject2[1] > (xyObject1[1])-sizeObject2[1] and xyObject2[1] < (xyObject1[1]+ sizeObject1[1]):
-            return True
-    return False
+# def collisionRect(xyObject1,sizeObject1, xyObject2, sizeObject2 ):
+#     if xyObject2[0] > (xyObject1[0])-sizeObject2[0] and xyObject2[0] < (xyObject1[0]+ sizeObject1[0]):
+#         if xyObject2[1] > (xyObject1[1])-sizeObject2[1] and xyObject2[1] < (xyObject1[1]+ sizeObject1[1]):
+#             return True
+#     return False
 
 
-def detectDeadRow(enemyAlive):
-      for row in range(len(enemyAlive)):
-        for column in range(len(enemyAlive[row])):
-            if not enemyAlive[row][column]:
-              counter += 1
-        return counter   
+# def detectDeadRow(enemyAlive):
+#       for row in range(len(enemyAlive)):
+#         for column in range(len(enemyAlive[row])):
+#             if not enemyAlive[row][column]:
+#               counter += 1
+#         return counter   
 
 
 
-def updateLowest(lowestEnemy,aliveEnemy):
-    for enemiesRow in range(len(aliveEnemy)):
-        x = 0
-        for enemiesColumn in range(len(aliveEnemy[enemiesRow])):
-            if aliveEnemy[enemiesRow][enemiesColumn] and enemiesColumn + 1 > x:
-                x = enemiesColumn + 1
-                lowestEnemy[enemiesRow] = x
-    return lowestEnemy
+# def updateLowest(lowestEnemy,aliveEnemy):
+#     for enemiesRow in range(len(aliveEnemy)):
+#         x = 0
+#         for enemiesColumn in range(len(aliveEnemy[enemiesRow])):
+#             if aliveEnemy[enemiesRow][enemiesColumn] and enemiesColumn + 1 > x:
+#                 x = enemiesColumn + 1
+#                 lowestEnemy[enemiesRow] = x
+#     return lowestEnemy
 
-def enemyFire(xyEnemy,distEnemy,sizeEnemy,lowestEnemy,sizeBullet,color,screen):
-    randomNum = random.randint(1,10)
-    xy = [xyEnemy[0] + (randomNum - 1)*distEnemy[0] +((randomNum)* sizeEnemy[0]) , xyEnemy[1] +(lowestEnemy[randomNum - 1] - 1)*distEnemy[1] + (lowestEnemy[randomNum - 1]) * sizeEnemy[1]]
-    makeRect(color ,xy ,sizeBullet,screen)
-    return xy , True
+# def enemyFire(xyEnemy,distEnemy,sizeEnemy,lowestEnemy,sizeBullet,color,screen):
+#     randomNum = random.randint(1,10)
+#     xy = [xyEnemy[0] + (randomNum - 1)*distEnemy[0] +((randomNum)* sizeEnemy[0]) , xyEnemy[1] +(lowestEnemy[randomNum - 1] - 1)*distEnemy[1] + (lowestEnemy[randomNum - 1]) * sizeEnemy[1]]
+#     makeRect(color ,xy ,sizeBullet,screen)
+#     return xy , True
 
 def enemyBulletBorderCollision(xyBullet,screenSize):
     if xyBullet[1] > screenSize[1][1] - screenSize[0][1]:

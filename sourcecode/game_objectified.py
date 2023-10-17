@@ -155,10 +155,10 @@ while running:
     #create player model and update movement
     player1.makeRect(screen)
     player1.movePlayer(pressed,DISPLAY_SIZE, screen,borderMargin)
-
+    
     #lose condition on enemy collision
-  #  if g.gameOver(playerXY, xyEnemy, DISPLAY_SIZE, playerSize, (DISPLAY_SIZE[1] - playerXY[1] ) / playerSize[1], g.detectDeadRow(enemyAlive), enemyDist, enemySize):
-   #     running = False
+    if h.gameOver( enemy.coordinate, DISPLAY_SIZE, playerSize,enemy.deadRow , enemyDist, enemySize):
+       running = False
     
     pygame.display.flip()  
 
