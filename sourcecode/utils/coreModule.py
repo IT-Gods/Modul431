@@ -74,19 +74,21 @@ class Enemies(Character):
                               [True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True],[True, True, True, True]]
         self.shooterEnemy = [4,4,4,4,4,4,4,4,4,4]
         self.deadColumn = [0,9]
-        self.deadRow = 4
+        self.deadRow = 0
         self.direction = 1
 
         self.dist = [self.size[0] / 1.2, self.size[1] / 1.2] 
     
-    #this good
+    #check if the last element of each row is dead, due to current implementation, rows are located horizontally
     def rowDead(self):
         counter = 0
-        for row in range(len(self.aliveIndividual[self.deadRow])):
-            if not self.aliveIndividual[self.deadRow][row]:
-                counter += 1
+        for row in range(len(self.aliveIndividual)):
+            if not self.aliveIndividual[row][len(self.aliveIndividual[row]) - 1]:
+                    counter += 1
         if counter == 10:
-            self.deadRow -= 1
+            self.deadRow += 1
+        
+    
 
     #this also good
     def columnDead(self):
