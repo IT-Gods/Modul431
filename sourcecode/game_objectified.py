@@ -110,6 +110,7 @@ while running:
         player1.bullet1.alive = h.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
         if not player1.bullet1.alive:
             enemy.rowDead()
+            enemy.columnDead()
             enemy.updateLowest()
              
 

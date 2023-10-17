@@ -146,7 +146,7 @@ class Enemies(Character):
 
  #select shooter enemy randomly
     def findShotPos(self):
-        randomNum = random.randint(1,10)
+        randomNum = random.randint(self.deadColumn[0] + 1,self.deadColumn[1] + 1)
         xy = [self.coordinate[0] + (randomNum - 1)*self.dist[0] +((randomNum)* self.size[0]) , self.coordinate[1] +(self.shooterEnemy[randomNum - 1] - 1)*self.dist[1] + (self.shooterEnemy[randomNum - 1]) * self.size[1]]
         return xy
 
