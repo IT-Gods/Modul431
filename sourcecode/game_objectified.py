@@ -159,7 +159,7 @@ while running:
     player1.movePlayer(pressed,DISPLAY_SIZE, screen,borderMargin)
     
     #lose condition on enemy collision
-    if h.gameOver( enemy.coordinate, DISPLAY_SIZE, playerSize,enemy.deadRow , enemyDist, enemySize):
+    if h.gameOver( enemy.coordinate, DISPLAY_SIZE, playerSize,enemy.deadRow , enemyDist, enemySize) or h.victory(enemy.aliveIndividual):
        running = False
     
     pygame.display.flip()  

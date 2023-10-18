@@ -5,7 +5,16 @@ def gameOver(enemyXY, displayXY, playerSize,deadRow, enemyDist, enemySize):
     if  deadRow >= 1:
        return enemyXY[1] -  ((deadRow * (enemySize[1] + enemyDist[1]) ) ) >  playerZone 
     else:
-       return enemyXY[1] >  playerZone 
+       return enemyXY[1] >  playerZone
+    
+def victory(aliveIndividual):
+    counter = 0
+    for row in range(len(aliveIndividual)):
+        for column in range(len(aliveIndividual[row])):
+            if not aliveIndividual[row][column]:
+                counter +=1
+    if counter == len(aliveIndividual) * len(aliveIndividual[row]):
+        return True
 
 
 #what is this function?
