@@ -17,7 +17,7 @@ def victory(aliveIndividual):
         return True
 
 
-#what is this function?
+#wtf?
 def detectCollisionBorder(XY,screenSize):
 
     if XY[0] == 0 or XY[0] == screenSize[0]:
@@ -89,11 +89,11 @@ def columnDead(deadEnemy,aliveEnemy):
 #Standard function for detecting collision between two rectangles
 #objects should be 2x1 array in following order 
 #(coordinate1, size1 ,coordinate2, size2) 
-# def collisionRect(xyObject1,sizeObject1, xyObject2, sizeObject2 ):
-#     if xyObject2[0] > (xyObject1[0])-sizeObject2[0] and xyObject2[0] < (xyObject1[0]+ sizeObject1[0]):
-#         if xyObject2[1] > (xyObject1[1])-sizeObject2[1] and xyObject2[1] < (xyObject1[1]+ sizeObject1[1]):
-#             return True
-#     return False
+def collisionRect(xyObject1,sizeObject1, xyObject2, sizeObject2 ):
+     if xyObject2[0] > (xyObject1[0])-sizeObject2[0] and xyObject2[0] < (xyObject1[0]+ sizeObject1[0]):
+        if xyObject2[1] > (xyObject1[1])-sizeObject2[1] and xyObject2[1] < (xyObject1[1]+ sizeObject1[1]):
+             return True
+     return False
 
 
 # def detectDeadRow(enemyAlive):

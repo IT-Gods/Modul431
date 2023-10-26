@@ -101,7 +101,6 @@ while running:
 
     enemy.makeEnemies(screen)
 
-  
 
 
             
@@ -141,18 +140,25 @@ while running:
     if enemy.bullet1.alive:
         enemy.bullet1.moveY(1,0.2,screen)
         enemy.bullet1.alive = h.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
+        if h.collisionRect(enemy.bullet1.coordinate,enemy.bullet1.size,player1.coordinate,player1.size):
+            player1.lives -= 1
+            enemy.bullet1.alive = False
         #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
             #running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
 
     if enemy.bullet2.alive:
         enemy.bullet2.moveY(1,0.2,screen)
         enemy.bullet2.alive = h.enemyBulletBorderCollision(enemy.bullet2.coordinate, playgroundSafeArea)
+        if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player1.coordinate,player1.size):
+            player1.lives -= 1
+            enemy.bullet2.alive = False
 
     if enemy.bullet3.alive:
         enemy.bullet3.moveY(1,0.2,screen)
         enemy.bullet3.alive = h.enemyBulletBorderCollision(enemy.bullet3.coordinate, playgroundSafeArea)
-
-
+        if h.collisionRect(enemy.bullet3.coordinate,enemy.bullet3.size,player1.coordinate,player1.size):
+            player1.lives -= 1
+            enemy.bullet3.alive = False
 
     #create player model and update movement
     player1.makeRect(screen)
@@ -161,6 +167,7 @@ while running:
     #lose condition on enemy collision
     if h.gameOver( enemy.coordinate, DISPLAY_SIZE, playerSize,enemy.deadRow , enemyDist, enemySize) or h.victory(enemy.aliveIndividual):
        running = False
-    
+    if player1.lives == 0:
+       running = False
     pygame.display.flip()  
 
