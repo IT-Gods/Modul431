@@ -7,12 +7,11 @@ import utils.helpers as h
 
 
 
-def run_game(level, playerAmount, SPRITESTHEME1):
+def run_game(level, playerAmount, SPRITESTHEME1,screen):
     DISPLAY_SIZE = [1280,720]
 
     colorpalette = c.colors()
     pygame.init()
-    screen = pygame.display.set_mode((DISPLAY_SIZE[0],DISPLAY_SIZE[1]))       #Screen size
     clock = pygame.time.Clock()                         #time
     running = True                                      #this should be obvious
 

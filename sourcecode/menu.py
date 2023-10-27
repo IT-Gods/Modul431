@@ -104,7 +104,7 @@ def menu_screen(screen):
             if pressed[pygame.K_LEFT]:
                 game_running = True
                 while game_running:
-                    outcome =   g.run_game(1,1,THEME_CURR)
+                    outcome =   g.run_game(1,1,THEME_CURR,screen)
                     if outcome == 1:
                         lvl += 1
                     if outcome == -1:
@@ -115,7 +115,7 @@ def menu_screen(screen):
             if pressed[pygame.K_RIGHT]:
                 game_running = True
                 while game_running:
-                    outcome =   g.run_game(1,2,THEME_CURR)
+                    outcome =   g.run_game(1,2,THEME_CURR,screen)
                     if outcome == 1:
                         lvl += 1
                     if outcome == -1:
