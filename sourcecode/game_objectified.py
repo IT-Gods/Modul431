@@ -22,7 +22,6 @@ def run_game(level, playerAmount, SPRITESTHEME1):
     #color definitions
 
 
-    #SPRITESTHEME = [pygame.image.load(os.path.join("DesignElements/StarshipsWereMeantToFly.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png"))]
     THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
 
 
@@ -99,16 +98,16 @@ def run_game(level, playerAmount, SPRITESTHEME1):
         pressed = pygame.key.get_pressed() 
         for event in pygame.event.get():
             if pressed[pygame.K_ESCAPE]:                #if escape key pressed quit
-                return -1
+                return -2
             if event.type == pygame.QUIT:
-                running = False
+                return -2
             if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
                 if player1.bullet1.alive == False:                 #checks if bullet on screen
-                    player1.fire1(player1.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[3])
+                    player1.fire1(player1.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[2])
                     player1.bullet1.alive = True  
             if pressed[pygame.K_w] and playerAmount == 2:
                 if player2.bullet1.alive == False:                 #checks if bullet on screen
-                    player2.fire1(player2.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[3])
+                    player2.fire1(player2.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[2])
                     player2.bullet1.alive = True  
 
         enemy.moveXO(0.2 + (0.05 * (level -1)),enemy.direction)
@@ -156,11 +155,11 @@ def run_game(level, playerAmount, SPRITESTHEME1):
         if counter == 1000:
         
             if enemy.bullet2.alive and not enemy.bullet3.alive:
-                enemy.fire3(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+                enemy.fire3(enemy.findShotPos(),bulletSize,SPRITESTHEME1[2])
             elif enemy.bullet1.alive and not enemy.bullet2.alive:
-                    enemy.fire2(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+                    enemy.fire2(enemy.findShotPos(),bulletSize,SPRITESTHEME1[2])
             elif not  enemy.bullet1.alive:
-                enemy.fire1(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+                enemy.fire1(enemy.findShotPos(),bulletSize,SPRITESTHEME1[2])
             counter = 0
 
 
@@ -206,12 +205,4 @@ def run_game(level, playerAmount, SPRITESTHEME1):
             return 1
 
         pygame.display.flip()  
-runner = True
-lvl = 1
-while runner:
-    outcome =run_game(1,1)
-    if outcome == 1:
-        lvl += 1
-    if outcome == -1:
-        runner = False
-        
+       

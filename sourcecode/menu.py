@@ -4,8 +4,8 @@ import utils.colors as c
 import  os
 import utils.helpers as h
 import settings as settings
-
-
+import game_objectified as g
+import utils.themes as t
 
 
 
@@ -22,7 +22,7 @@ def menu_screen(screen):
     colorTheme= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]                                 #this should be obvious
     
    
-    
+    THEME_CURR = t.THEME1
     borderMargin = [20, 20]
     
     image=pygame.image.load(os.path.join("DesignElements/enemy-element2.jpeg"))   
@@ -79,10 +79,10 @@ def menu_screen(screen):
     timesSelect += 1
     font = pygame.font.Font('freesansbold.ttf', 20)
     pygame.draw.rect(screen,colorTheme[0],selectOption1)
-    screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
+    screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
     pygame.draw.rect(screen,colorTheme[0],selectOption2)
     
-    screen.blit(font.render('Single', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
+    screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
     pygame.draw.rect(screen,colorTheme[0],selectOption3)
 
     screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
@@ -101,6 +101,32 @@ def menu_screen(screen):
                 running = False
             if pressed[pygame.K_UP]:
                 settings.make_settings(screen)
+            if pressed[pygame.K_LEFT]:
+                game_running = True
+                while game_running:
+                    outcome =   g.run_game(1,1,THEME_CURR)
+                    if outcome == 1:
+                        lvl += 1
+                    if outcome == -1:
+                        game_running = False
+                    if outcome == -2:
+                        running = False
+                        game_running = False
+            if pressed[pygame.K_RIGHT]:
+                game_running = True
+                while game_running:
+                    outcome =   g.run_game(1,2,THEME_CURR)
+                    if outcome == 1:
+                        lvl += 1
+                    if outcome == -1:
+                        game_running = False
+                    if outcome == -2:
+                        running = False
+                        game_running = False
+
+    
+ 
+
             
 
               

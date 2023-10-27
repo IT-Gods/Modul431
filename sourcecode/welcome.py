@@ -65,7 +65,8 @@ while running:
             running = False
 
         if pressed[pygame.K_SPACE]:  
-            menu.menu_screen(screen)           
+            menu.menu_screen(screen)
+            running = False
             
 
 

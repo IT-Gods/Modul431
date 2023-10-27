@@ -15,7 +15,7 @@ class Rectangle:
     def makeRect(self, screen):
         self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.size[0],self.size[1])
         #pygame.draw.rect(screen,self.color,self.rect)
-        screen.blit(self.image,self.rect)
+        screen.blit(pygame.transform.scale(self.image,self.size),self.rect)
 
 # this is a pseudo fix for the topleft rect bug
     def moveXO(self, magnitude, direction):
@@ -129,7 +129,8 @@ class Enemies(Character):
             for enemiesRow in range(len(self.aliveIndividual)):
                 for enemiesColumn in range(len(self.aliveIndividual[enemiesRow])):
                     if self.aliveIndividual[enemiesRow][enemiesColumn]:
-                        self.makeRect(screen)
+                        self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.size[0],self.size[1])
+                        screen.blit(self.image[enemiesColumn],self.rect)
                     self.coordinate[1] += self.dist[1] + self.size[1]
                 self.coordinate[0] += self.dist[0] + self.size[0] 
                 self.coordinate[1] -= self.dist[1] * 4 + self.size[1] * 4  
