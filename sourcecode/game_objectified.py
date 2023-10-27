@@ -21,7 +21,7 @@ running = True                                      #this should be obvious
 #color definitions
 
 
-SPRITESTHEME1 = [pygame.image.load(os.path.join("DesignElements/StarshipsWereMeantToFly.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png"))]
+SPRITESTHEME1 = [pygame.image.load(os.path.join("DesignElements/StarshipsWereMeantToFly.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png"))]
 THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
 
 
