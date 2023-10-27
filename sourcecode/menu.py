@@ -49,9 +49,7 @@ def menu_screen(screen):
     playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
     playAreaWidth = [playgroundSafeArea[1][0]-playgroundSafeArea[0][0], playgroundSafeArea[1][1]-playgroundSafeArea[0][1]]
     playAreaRect = pygame.Rect(playgroundSafeArea[0][0], playgroundSafeArea[0][1], playAreaWidth[0], playAreaWidth[1])
-    # menuWallSize = [1210,700]
-    # menuWallXY = [screenMiddle[0]-menuWallSize[0]/2,screenMiddle[1]-menuWallSize[1]/2]  
-    # borderWall = 5
+ 
 
     selectOptionSize = [150,75]
     selectOptionSpace = 100
@@ -62,8 +60,6 @@ def menu_screen(screen):
 
 
 
-    # menuWall1 = pygame.Rect(menuWallXY[0],menuWallXY[1],menuWallSize[0],menuWallSize[1])
-    # menuWall2 = pygame.Rect(menuWallXY[0] + borderWall , menuWallXY[1] + borderWall , menuWallSize[0] - 2 * borderWall , menuWallSize[1] - 2 * borderWall)
 
     
     selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1]
