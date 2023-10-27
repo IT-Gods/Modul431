@@ -1,4 +1,5 @@
 import pygame
+import os
 
 def gameOver(enemyXY, displayXY, playerSize,deadRow, enemyDist, enemySize):
     playerZone = displayXY[1] / 2 - playerSize[1] 
@@ -125,6 +126,13 @@ def enemyBulletBorderCollision(xyBullet,screenSize):
         return False
     else:
         return True
+    
+def adjustImage(image, displayDimention, screen, safeAreas, position):
+    image=pygame.image.load(os.path.join(image))   
+    imageScale = pygame.transform.scale(image, [displayDimention[0] - safeAreas[0],displayDimention[1] - safeAreas[1]])
+    image_top = screen.get_height() / position[0] - imageScale.get_height() / position[1]
+    image_left = screen.get_width()/ position[2] - imageScale.get_width()/ position[3]
+    return [imageScale,image_top, image_left]
 
 
 
