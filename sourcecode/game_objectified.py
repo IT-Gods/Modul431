@@ -1,10 +1,10 @@
 
 #simple pygame initialisation will fill screen white
 import pygame
-import sys , os
 import utils.coreModule as g
 import utils.colors as c
 import utils.helpers as h
+
 
 
 def run_game(level, playerAmount, SPRITESTHEME1):
@@ -15,6 +15,7 @@ def run_game(level, playerAmount, SPRITESTHEME1):
     screen = pygame.display.set_mode((DISPLAY_SIZE[0],DISPLAY_SIZE[1]))       #Screen size
     clock = pygame.time.Clock()                         #time
     running = True                                      #this should be obvious
+
 
 
     #MAKE ALL OF THIS GO AWAY INTO SOME OTHER FILE LET ME OUT
@@ -199,6 +200,7 @@ def run_game(level, playerAmount, SPRITESTHEME1):
             return -1
         if player1.lives == 0:
             running = False
+
             return -1
         if h.victory(enemy.aliveIndividual):
             return 1
