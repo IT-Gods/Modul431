@@ -62,10 +62,10 @@ class Player(Character):
         return [self.coordinate[0]+self.size[0]/2-(bulletSize[0]/2),self.coordinate[1]-self.size[1]/2]
     
 
-    def movePlayer(self,pressed,displaySize, screen, borderMargin):
-        if pressed[pygame.K_LEFT] and self.coordinate[0] != borderMargin[0]:
+    def movePlayer(self,pressed1,pressed2,displaySize, screen, borderMargin):
+        if pressed1 and self.coordinate[0] != borderMargin[0]:
            return  self.moveX(0.5, -1, screen)
-        if pressed[pygame.K_RIGHT] and self.coordinate[0] + self.size[1] != displaySize[0] - borderMargin[0]:
+        if pressed2 and self.coordinate[0] + self.size[1] != displaySize[0] - borderMargin[0] -self.size[0]:
           return self.moveX(0.5, +1, screen)
         
     
