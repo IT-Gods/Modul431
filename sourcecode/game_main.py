@@ -12,13 +12,15 @@ clock = pygame.time.Clock()                         #time
 running = True                                      #this should be obvious
 
 #color definitions
-
+#needs to be adjusted to actual themes?
 GREEN = pygame.Color(0,255,0)
 RED = pygame.Color(255,0,0)
 BLACK = pygame.Color(0,0,0)
 WHITE = pygame.Color(255,255,255)
+PINK = pygame.Color(245, 101, 139)
 
 THEME1= [GREEN,RED,BLACK,WHITE]
+THEME2= [PINK, RED, BLACK, WHITE]
 
 #definitions of ingame objects
 playerSize = [20,20]
