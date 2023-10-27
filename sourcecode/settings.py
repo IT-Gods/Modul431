@@ -4,6 +4,7 @@ import utils.colors as c
 import  os
 import utils.helpers as h
 import settings as settings
+import menu as menu
 
 
 
@@ -98,11 +99,19 @@ def make_settings(screen):
         for event in pygame.event.get():             
             if event.type == pygame.QUIT:
                 running = False
-            
-            
-
+            if pressed[pygame.K_1]:
+                return 1 and menu.menu_screen(screen)
+                menu.menu_screen(screen)
+            elif pressed[pygame.K_2]:
+                return 2 and menu.menu_screen(screen)
+                
+            elif pressed[pygame.K_3]:
+                return 3 and menu.menu_screen(screen)
               
-    
+            elif pressed[pygame.K_ESCAPE]:
+                menu.menu_screen(screen)
+            elif pressed[pygame.K_KP_ENTER]:
+                running = False
         pygame.display.flip()
     
     
