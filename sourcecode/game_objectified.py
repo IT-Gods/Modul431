@@ -2,7 +2,6 @@
 #simple pygame initialisation will fill screen white
 
 import pygame
-import sys , os
 import utils.coreModule as g
 import utils.colors as c
 import utils.helpers as h
@@ -21,14 +20,12 @@ running = True                                      #this should be obvious
 #color definitions
 
 
-SPRITESTHEME1 = [pygame.image.load(os.path.join("DesignElements/StarshipsWereMeantToFly.png")),pygame.image.load(os.path.join("DesignElements/Enemy1.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png")),pygame.image.load(os.path.join("DesignElements/BulletSprite.png"))]
 THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
 
 
 #definitions of ingame objects
 playerSize = [20,20]
 playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*7/8)-playerSize[1]/2]
-
 
 bulletSize = [5,15]
 bulletXY = [playerXY[0]-playerSize[0]/2, playerXY[1]-playerSize[1]/2]
@@ -69,13 +66,13 @@ deadEnemyCounter = 0
 
 
 #INSHALLAH MAKE OBJECTS
-player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], SPRITESTHEME1[0], 3)
-player1.fire1(player1.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[1])
+player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], THEME1[0], 3)
+player1.fire1(player1.calcMiddle(bulletSize),bulletSize,THEME1[1])
 player1.bullet1.alive = False
-enemy = g.Enemies(enemyXY[0],enemyXY[1],enemySize[0],enemySize[1],SPRITESTHEME1[1])
-enemy.fire1([1000,1000],[1000,1000],SPRITESTHEME1[2])
-enemy.fire2([1000,1000],[1000,1000],SPRITESTHEME1[2])
-enemy.fire3([1000,1000],[1000,1000],SPRITESTHEME1[2])
+enemy = g.Enemies(enemyXY[0],enemyXY[1],enemySize[0],enemySize[1],THEME1[0])
+enemy.fire1([1,1],[1,1],THEME1[1])
+enemy.fire2([1,1],[1,1],THEME1[1])
+enemy.fire3([1,1],[1,1],THEME1[1])
 
 
 
@@ -96,7 +93,7 @@ while running:
             running = False
         if pressed[pygame.K_SPACE]:                 #if spacebar is pressed make a bullet
             if player1.bullet1.alive == False:                 #checks if bullet on screen
-                player1.fire1(player1.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[3])
+                player1.fire1(player1.calcMiddle(bulletSize),bulletSize,THEME1[1])
                 player1.bullet1.alive = True  
     enemy.moveXO(0.2,enemy.direction)
     # found the bug this also draws a rect by default so make it seperately
@@ -131,11 +128,11 @@ while running:
     if counter == 1000:
     
         if enemy.bullet2.alive and not enemy.bullet3.alive:
-            enemy.fire3(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+            enemy.fire3(enemy.findShotPos(),bulletSize,THEME1[1])
         elif enemy.bullet1.alive and not enemy.bullet2.alive:
-                enemy.fire2(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+                enemy.fire2(enemy.findShotPos(),bulletSize,THEME1[1])
         elif not  enemy.bullet1.alive:
-            enemy.fire1(enemy.findShotPos(),bulletSize,SPRITESTHEME1[1])
+            enemy.fire1(enemy.findShotPos(),bulletSize,THEME1[1])
         counter = 0
 
 
