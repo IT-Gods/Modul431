@@ -11,7 +11,7 @@ class colors:
         return pygame.Color(0,0,0)
     
     def white(self):
-        return pygame.Color(228,242,2249)
+        return pygame.Color(228,242,249)
     
     def blue(self):
         return pygame.Color(27, 45, 181)
