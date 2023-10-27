@@ -100,13 +100,13 @@ def make_settings(screen):
             if event.type == pygame.QUIT:
                 running = False
             if pressed[pygame.K_1]:
-                return 1 and menu.menu_screen(screen)
-                menu.menu_screen(screen)
+                return 1 
+               
             elif pressed[pygame.K_2]:
-                return 2 and menu.menu_screen(screen)
+                return 2 
                 
             elif pressed[pygame.K_3]:
-                return 3 and menu.menu_screen(screen)
+                return 3 
               
             elif pressed[pygame.K_ESCAPE]:
                 menu.menu_screen(screen)

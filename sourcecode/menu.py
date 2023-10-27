@@ -65,10 +65,7 @@ def menu_screen(screen):
     # menuWall1 = pygame.Rect(menuWallXY[0],menuWallXY[1],menuWallSize[0],menuWallSize[1])
     # menuWall2 = pygame.Rect(menuWallXY[0] + borderWall , menuWallXY[1] + borderWall , menuWallSize[0] - 2 * borderWall , menuWallSize[1] - 2 * borderWall)
 
-    screen.fill("green")
-    pygame.draw.rect(screen,colorTheme[2],playAreaRect)
-    # pygame.draw.rect(screen,colorTheme[2],menuWall2)
-    screen.blit(welcome, image_rect)
+    
     selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1]
 
     selectOption1 = pygame.Rect(selectOptionXY[0]+timesSelect*selectOptionSpace , selectOptionXY[1],selectOptionSize[0],selectOptionSize[1])
@@ -78,19 +75,8 @@ def menu_screen(screen):
     selectOption3 = pygame.Rect(selectOptionXY[0] +timesSelect*selectOptionSpace / 2 , screenMiddle[1] + 150,selectOptionSize[0],selectOptionSize[1])
     timesSelect += 1
     font = pygame.font.Font('freesansbold.ttf', 20)
-    pygame.draw.rect(screen,colorTheme[0],selectOption1)
-    screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
-    pygame.draw.rect(screen,colorTheme[0],selectOption2)
-    
-    screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
-    pygame.draw.rect(screen,colorTheme[0],selectOption3)
 
-    screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
-
-    
-    
-    
-    
+   
     
     
     
@@ -100,11 +86,18 @@ def menu_screen(screen):
             if event.type == pygame.QUIT:
                 running = False
             if pressed[pygame.K_UP]:
-                settings.make_settings(screen)
+                outcome = settings.make_settings(screen)
+                match outcome:
+                    case 1:
+                        THEME_CURR = t.THEME1
+                    case 2:
+                        THEME_CURR = t.THEME2
+                    case 3:
+                        THEME_CURR = t.THEME3
             if pressed[pygame.K_LEFT]:
                 game_running = True
                 while game_running:
-                    outcome =   g.run_game(1,1,THEME_CURR)
+                    outcome = g.run_game(1,1,THEME_CURR)
                     if outcome == 1:
                         lvl += 1
                     if outcome == -1:
@@ -123,6 +116,26 @@ def menu_screen(screen):
                     if outcome == -2:
                         running = False
                         game_running = False
+
+        screen.fill("green")
+        pygame.draw.rect(screen,colorTheme[2],playAreaRect)
+        # pygame.draw.rect(screen,colorTheme[2],menuWall2)
+        screen.blit(welcome, image_rect)
+        pygame.draw.rect(screen,colorTheme[0],selectOption1)
+        screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption2)
+        
+        screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption3)
+    
+        screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
+
+    
+    
+    
+    
+            
+                    
 
     
  
