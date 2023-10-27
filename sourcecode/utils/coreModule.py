@@ -1,21 +1,21 @@
 import pygame
 import random
 
-
 #first implementation of classes for all rectangles
 class Rectangle:
 
 
-    def __init__(self ,x , y , xSize, ySize, color):
+    def __init__(self ,x , y , xSize, ySize, image):
         self.coordinate = [x, y]
         self.size = [xSize, ySize]
-        self.color = color
+        self.image = image
         self.alive = True
     
     
     def makeRect(self, screen):
         self.rect = pygame.Rect(self.coordinate[0],self.coordinate[1],self.size[0],self.size[1])
-        pygame.draw.rect(screen,self.color,self.rect)
+        #pygame.draw.rect(screen,self.color,self.rect)
+        screen.blit(self.image,self.rect)
 
 # this is a pseudo fix for the topleft rect bug
     def moveXO(self, magnitude, direction):
@@ -145,7 +145,10 @@ class Enemies(Character):
 
  #select shooter enemy randomly
     def findShotPos(self):
-        randomNum = random.randint(self.deadColumn[0],self.deadColumn[1])
+        if self.deadColumn[0] == self.deadColumn[1]:
+            randomNum = self.deadColumn[0] + 1
+        else:
+            randomNum = random.randint(self.deadColumn[0]+ 1,self.deadColumn[1])
         xy = [self.coordinate[0] + (randomNum - 1)*self.dist[0] +((randomNum)* self.size[0]) , self.coordinate[1] +(self.shooterEnemy[randomNum - 1] - 1)*self.dist[1] + (self.shooterEnemy[randomNum - 1]) * self.size[1]]
         return xy
 
