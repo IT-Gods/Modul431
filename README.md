@@ -22,7 +22,14 @@ source venv/bin/activate
    
 - Update the project dependencies ▶️
   ```
-  pip3 install -r reqiurements.txt
+  pip3 install -r requirements.txt
+  
+  ```
+
+- Run the game ▶️
+  ```
+ cd sourceCode
+ python3 main.py
   
   ```
 
