@@ -28,7 +28,6 @@ source venv/bin/activate
 
 - Run the game ▶️
   ```
- cd sourceCode
  python3 main.py
   
   ```
