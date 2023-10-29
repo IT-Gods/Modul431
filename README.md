@@ -28,7 +28,7 @@ source venv/bin/activate
 
 - Run the game ▶️
   ```
-  cd sourceCode
+  cd sourcecode
   python3 main.py
   
   ```
@@ -56,7 +56,7 @@ achieve our creative vision and challenge ourselves to learn new things.
 
 |File or Directory|Content|
 |---|---|
-|code/|The directory containing the source code|
+|sourcecode/|The directory containing the source code|
 |documentation/|The directory containing the documentation of the project|
 |sources.md|This is a file containing various information sources|
 |README.md|This file|
