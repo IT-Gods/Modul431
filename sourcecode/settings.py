@@ -14,8 +14,7 @@ import menu as menu
 
 def make_settings(screen):
     pygame.init()                                   
-    #screen = pygame.display.set_mode((1280, 720))       #Screen size
-    clock = pygame.time.Clock()                         #time
+    clock = pygame.time.Clock()                 
     running = True  
     DISPLAY_SIZE = [1280,720]  
     
@@ -29,37 +28,16 @@ def make_settings(screen):
     titleSize = 80
     fontTitle = pygame.font.Font('freesansbold.ttf', titleSize)
     
-    
-
-    
-    
-  
-    
-    #variables
     select = 0
     timesSelect = 0
-
-
-    #size parameters
-
     screenMiddle = [1280/2,720/2]
-
-
     borderMargin = [20, 20]
     playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
     playAreaWidth = [playgroundSafeArea[1][0]-playgroundSafeArea[0][0], playgroundSafeArea[1][1]-playgroundSafeArea[0][1]]
     playAreaRect = pygame.Rect(playgroundSafeArea[0][0], playgroundSafeArea[0][1], playAreaWidth[0], playAreaWidth[1])
-
-
     selectOptionSize = [150,75]
     selectOptionSpace = 100
     selectOptionXY = [screenMiddle[0] - 3 * (selectOptionSize[0] / 2) - selectOptionSpace / 2, screenMiddle[1] ]
-
-    #color parameters
-
-
-
-
 
     screen.fill("green")
     pygame.draw.rect(screen,colorTheme[2],playAreaRect)
