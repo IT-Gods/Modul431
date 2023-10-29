@@ -17,8 +17,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
 
 
-    #MAKE ALL OF THIS GO AWAY INTO SOME OTHER FILE LET ME OUT
-    #color definitions
+   #Carmen: Where is the menu and the settings? Should I not start with game_objectified?
 
 
     THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
@@ -35,6 +34,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
     borderMargin = [20, 20]
 
+    #Carmen: What is this used for?
     playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
 
     playAreaWidth = [playgroundSafeArea[1][0]-playgroundSafeArea[0][0], playgroundSafeArea[1][1]-playgroundSafeArea[0][1]]
@@ -135,7 +135,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
                     enemy.columnDead()
                     enemy.updateLowest() 
 
-                #wtf does this even mean wtf is enemyDead ???????
+                #Carmen: what is Enemy dead?
             if enemyDead[1] == 0: #victory condition
                 running = False
 
@@ -163,6 +163,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
 
     # bullet events for enemies 
+    #Carmen: Am I correct in assuming this is the enemies firing bullets?
         if enemy.bullet1.alive:
             enemy.bullet1.moveY(1,0.2,screen)
             enemy.bullet1.alive = h.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
