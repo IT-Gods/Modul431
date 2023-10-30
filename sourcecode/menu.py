@@ -15,14 +15,13 @@ def menu_screen(screen):
     clock = pygame.time.Clock()                         #time
     pygame.init()                                   
     clock = pygame.time.Clock()                     
->>>>>>> c40c80e6501e37a41934c5943fa7b9c8c85c85cf
     running = True  
     DISPLAY_SIZE = [1280,720]  
     
     colorpalette = c.colors() 
     colorTheme= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]                                 #this should be obvious
-    
-   
+    lvl = 1   
+    score = 0
     THEME_CURR = t.THEME1
     borderMargin = [20, 20]
     
@@ -95,18 +94,22 @@ def menu_screen(screen):
             if pressed[pygame.K_LEFT]:
                 game_running = True
                 while game_running:
-                    outcome =   g.run_game(1,1,THEME_CURR,screen)
+                    outcome , score =   g.run_game(lvl,1,score,THEME_CURR,screen)
                     if outcome == 1:
                         lvl += 1
                     if outcome == -1:
                         game_running = False
+                        score = 0
                     if outcome == -2:
                         running = False
-                        game_running = False
+                        game_running = False 
+                    file = open('Highscore.txt', 'w')
+                    file.write(str(score))
+                    file.close()
             if pressed[pygame.K_RIGHT]:
                 game_running = True
                 while game_running:
-                    outcome =   g.run_game(1,2,THEME_CURR,screen)
+                    outcome , score =   g.run_game(lvl,2, score ,THEME_CURR,screen)
                     if outcome == 1:
                         lvl += 1
                     if outcome == -1:
@@ -114,6 +117,9 @@ def menu_screen(screen):
                     if outcome == -2:
                         running = False
                         game_running = False
+                    file = open('Highscore.txt', 'w')
+                    file.write(str(score))
+                    file.close()
 
            
                     

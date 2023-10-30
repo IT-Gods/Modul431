@@ -7,7 +7,7 @@ import utils.helpers as h
 
 
 
-def run_game(level, playerAmount, SPRITESTHEME1,screen):
+def run_game(level, playerAmount,score, SPRITESTHEME1,screen):
     DISPLAY_SIZE = [1280,720]
     pygame.init()
     clock = pygame.time.Clock()                  
@@ -22,8 +22,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
 
     #definitions of ingame objects
-    score = 0
-    scorefont = pygame.font.SysFont('Comic Sans MS', 30)
+    scorefont = pygame.font.SysFont('Comic Sans MS', 100)
 
     playerSize = [20,20]
     playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*7/8)-playerSize[1]/2]
@@ -66,16 +65,13 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
     enemiesColumn = 0
     deadEnemyCounter = 0
 
-<<<<<<< HEAD
     #hearts
     heartCoordinate = [1000,40]
     heartSize = [50,50]
     heart = g.Rectangle(heartCoordinate[0],heartCoordinate[1],heartSize[0],heartSize[1],SPRITESTHEME1[3])
 
     #INSHALLAH MAKE OBJECTS
-=======
 
->>>>>>> c40c80e6501e37a41934c5943fa7b9c8c85c85cf
     player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], SPRITESTHEME1[0], 3)
     player1.fire1(player1.calcMiddle(bulletSize),bulletSize,SPRITESTHEME1[1])
     player1.bullet1.alive = False
@@ -103,9 +99,9 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
         for event in pygame.event.get():
             #if escape key pressed quit
             if pressed[pygame.K_ESCAPE]:        
-                return -2
+                return -2, score
             if event.type == pygame.QUIT:
-                return -2
+                return -2, score
             #if spacebar is pressed make a bullet
             if pressed[pygame.K_SPACE]:   
                 #checks if bullet on screen             
@@ -132,7 +128,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             player1.bullet1.moveY(-1,1,screen)
             player1.bullet1.alive = h.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
             if not player1.bullet1.alive:
-                score + = 100
+                score += 100
                 enemy.rowDead()
                 enemy.columnDead()
                 enemy.updateLowest()
@@ -194,7 +190,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
                 player1.lives -= 1
                 enemy.bullet1.alive = False
             if playerAmount == 2:
-                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player1.size):
+                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player2.size):
                     player2.lives -= 1
                     enemy.bullet2.alive = False
             #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
@@ -207,7 +203,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
                 player1.lives -= 1
                 enemy.bullet2.alive = False
             if playerAmount == 2:
-                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player1.size):
+                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player2.size):
                     player2.lives -= 1
                     enemy.bullet2.alive = False
 
@@ -222,7 +218,8 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
                     player2.lives -= 1
                     enemy.bullet2.alive = False
 
-
+        scorerender = scorefont.render(str(score),False,(255,255,255))
+        screen.blit(scorerender,(50,50))
 
         #create player model and update movement
         player1.makeRect(screen)
@@ -233,18 +230,14 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
         #lose condition on enemy collision
         if h.gameOver( enemy.coordinate, DISPLAY_SIZE, playerSize,enemy.deadRow , enemyDist, enemySize):
             running = False
-            return -1
+            return -1, score
         if player1.lives == 0:
-            running = False
-
-        if player2.lives == 0:
-            running = False
-            return -1
+            return -1,score
+        if playerAmount == 2:
+            if player2.lives == 0:
+                return -1, score
         if h.victory(enemy.aliveIndividual):
-            return 1
+            return 1, score
 
         pygame.display.flip()  
-       
-    file = open('Highscore.txt', 'w')
-    file.write(score)
-    file.close()
+      
