@@ -66,13 +66,13 @@ def menu_screen(screen):
         # pygame.draw.rect(screen,colorTheme[2],menuWall2)
         screen.blit(welcome, image_rect)
         pygame.draw.rect(screen,colorTheme[0],selectOption1)
-        screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
+        screen.blit(font.render('1 Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
         pygame.draw.rect(screen,colorTheme[0],selectOption2)
         
-        screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
+        screen.blit(font.render('2 Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
         pygame.draw.rect(screen,colorTheme[0],selectOption3)
     
-        screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
+        screen.blit(font.render('3 Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
 
     
     
@@ -82,7 +82,7 @@ def menu_screen(screen):
         for event in pygame.event.get():             
             if event.type == pygame.QUIT:
                 running = False
-            if pressed[pygame.K_UP]:
+            if pressed[pygame.K_3]:
                 outcome = settings.make_settings(screen)
                 match outcome:
                     case 1:
@@ -91,7 +91,7 @@ def menu_screen(screen):
                         THEME_CURR = t.THEME2
                     case 3:
                         THEME_CURR = t.THEME3
-            if pressed[pygame.K_LEFT]:
+            if pressed[pygame.K_1]:
                 game_running = True
                 while game_running:
                     outcome , score =   g.run_game(lvl,1,score,THEME_CURR,screen)
@@ -99,14 +99,20 @@ def menu_screen(screen):
                         lvl += 1
                     if outcome == -1:
                         game_running = False
-                        score = 0
                     if outcome == -2:
                         running = False
                         game_running = False 
-                    file = open('Highscore.txt', 'w')
-                    file.write(str(score))
+                    file = open('Highscore.txt', 'r')
+                    comparesc = int(file.read())
                     file.close()
-            if pressed[pygame.K_RIGHT]:
+                    file2 = open('Highscore.txt', 'w')
+                    if comparesc <= score:
+                        file2.write(str(score))
+                    else:
+                        file2.write(str(comparesc))
+                    file.close()
+
+            if pressed[pygame.K_2]:
                 game_running = True
                 while game_running:
                     outcome , score =   g.run_game(lvl,2, score ,THEME_CURR,screen)
@@ -117,8 +123,14 @@ def menu_screen(screen):
                     if outcome == -2:
                         running = False
                         game_running = False
-                    file = open('Highscore.txt', 'w')
-                    file.write(str(score))
+                    file = open('Highscore.txt', 'r')
+                    comparesc = int(file.read())
+                    file.close()
+                    file2 = open('Highscore.txt', 'w')
+                    if comparesc <= score:
+                        file2.write(str(score))
+                    else:
+                        file2.write(str(comparesc))
                     file.close()
 
            

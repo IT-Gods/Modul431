@@ -149,16 +149,17 @@ def run_game(level, playerAmount,score, SPRITESTHEME1,screen):
 
 
         
-
+        #border collision for player bullets
         if player1.bullet1.alive:
             player1.bullet1.alive = h.detectCollisionBorder(player1.bullet1.coordinate,DISPLAY_SIZE)
         if playerAmount == 2:
             if player2.bullet1.alive:
                 player2.bullet1.alive = h.detectCollisionBorder(player2.bullet1.coordinate,DISPLAY_SIZE)
 
+        #enemies firing bullets
         counter += 1
         if counter == 1000:
-        
+            #only 3 bullets at a time
             if enemy.bullet2.alive and not enemy.bullet3.alive:
                 enemy.fire3(enemy.findShotPos(),bulletSize,SPRITESTHEME1[2])
             elif enemy.bullet1.alive and not enemy.bullet2.alive:
@@ -183,6 +184,7 @@ def run_game(level, playerAmount,score, SPRITESTHEME1,screen):
 
     # bullet events for enemies 
     #Carmen: Am I correct in assuming this is the enemies firing bullets? yes
+    #this is the bullets moving and colliding
         if enemy.bullet1.alive:
             enemy.bullet1.moveY(1,0.2,screen)
             enemy.bullet1.alive = h.enemyBulletBorderCollision(enemy.bullet1.coordinate, playgroundSafeArea)
@@ -193,8 +195,6 @@ def run_game(level, playerAmount,score, SPRITESTHEME1,screen):
                 if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player2.size):
                     player2.lives -= 1
                     enemy.bullet2.alive = False
-            #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
-                #running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
 
         if enemy.bullet2.alive:
             enemy.bullet2.moveY(1,0.2,screen)
@@ -232,7 +232,7 @@ def run_game(level, playerAmount,score, SPRITESTHEME1,screen):
             running = False
             return -1, score
         if player1.lives == 0:
-            return -1,score
+            return -1, score
         if playerAmount == 2:
             if player2.lives == 0:
                 return -1, score
