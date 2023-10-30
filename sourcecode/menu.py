@@ -12,8 +12,10 @@ import utils.themes as t
 
 
 def menu_screen(screen):
-    #screen = pygame.display.set_mode((1280, 720))       #Screen size
     clock = pygame.time.Clock()                         #time
+    pygame.init()                                   
+    clock = pygame.time.Clock()                     
+>>>>>>> c40c80e6501e37a41934c5943fa7b9c8c85c85cf
     running = True  
     DISPLAY_SIZE = [1280,720]  
     
@@ -30,17 +32,8 @@ def menu_screen(screen):
     image_rect.centerx = DISPLAY_SIZE[0] // 2  
     image_rect.top = 50
 
-    
-    
-  
-    
-    #variables
     select = 0
     timesSelect = 0
-
-
-    #size parameters
-
     screenMiddle = [1280/2,720/2]
 
 
@@ -48,23 +41,12 @@ def menu_screen(screen):
     playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
     playAreaWidth = [playgroundSafeArea[1][0]-playgroundSafeArea[0][0], playgroundSafeArea[1][1]-playgroundSafeArea[0][1]]
     playAreaRect = pygame.Rect(playgroundSafeArea[0][0], playgroundSafeArea[0][1], playAreaWidth[0], playAreaWidth[1])
-    # menuWallSize = [1210,700]
-    # menuWallXY = [screenMiddle[0]-menuWallSize[0]/2,screenMiddle[1]-menuWallSize[1]/2]  
-    # borderWall = 5
+   
 
     selectOptionSize = [150,75]
     selectOptionSpace = 100
+
     selectOptionXY = [screenMiddle[0] - 150 , screenMiddle[1] ]
-
-    #color parameters
-
-
-
-
-    # menuWall1 = pygame.Rect(menuWallXY[0],menuWallXY[1],menuWallSize[0],menuWallSize[1])
-    # menuWall2 = pygame.Rect(menuWallXY[0] + borderWall , menuWallXY[1] + borderWall , menuWallSize[0] - 2 * borderWall , menuWallSize[1] - 2 * borderWall)
-
-    
     selectOptionXY[1]+timesSelect*selectOptionSpace,selectOptionSize[0],selectOptionSize[1]
 
     selectOption1 = pygame.Rect(selectOptionXY[0]+timesSelect*selectOptionSpace , selectOptionXY[1],selectOptionSize[0],selectOptionSize[1])
@@ -143,6 +125,19 @@ def menu_screen(screen):
 
               
     
+        screen.fill("green")
+        pygame.draw.rect(screen,colorTheme[2],playAreaRect)
+        # pygame.draw.rect(screen,colorTheme[2],menuWall2)
+        screen.blit(welcome, image_rect)
+        pygame.draw.rect(screen,colorTheme[0],selectOption1)
+        screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption2)
+        
+        screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption3)
+    
+        screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
+
         pygame.display.flip()
     
     
