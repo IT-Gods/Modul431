@@ -59,6 +59,13 @@ welcome = h.adjustImage("DesignElements/space-invaders-org.jpg",DISPLAY_SIZE,scr
 
 #main game loop
 while running:
+
+    screen.fill("green")
+    
+    pygame.draw.rect(screen, THEME1[2] , playAreaRect)
+    screen.blit(welcome[0], (welcome[1],welcome[2])) 
+
+
     pressed = pygame.key.get_pressed() 
     for event in pygame.event.get():             
         if event.type == pygame.QUIT:
@@ -69,14 +76,7 @@ while running:
             running = False
             
 
-
-    screen.fill("green")
-    
-    pygame.draw.rect(screen, THEME1[2] , playAreaRect)
-    screen.blit(welcome[0], (welcome[1],welcome[2])) 
-
-
-  
+ 
    
    
 

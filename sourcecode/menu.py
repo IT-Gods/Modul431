@@ -12,7 +12,6 @@ import utils.themes as t
 
 
 def menu_screen(screen):
-    pygame.init()                                   
     #screen = pygame.display.set_mode((1280, 720))       #Screen size
     clock = pygame.time.Clock()                         #time
     running = True  
@@ -81,6 +80,23 @@ def menu_screen(screen):
     
     
     while running:
+        screen.fill("green")
+        pygame.draw.rect(screen,colorTheme[2],playAreaRect)
+        # pygame.draw.rect(screen,colorTheme[2],menuWall2)
+        screen.blit(welcome, image_rect)
+        pygame.draw.rect(screen,colorTheme[0],selectOption1)
+        screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption2)
+        
+        screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
+        pygame.draw.rect(screen,colorTheme[0],selectOption3)
+    
+        screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
+
+    
+    
+    
+    
         pressed = pygame.key.get_pressed()    
         for event in pygame.event.get():             
             if event.type == pygame.QUIT:
@@ -117,24 +133,7 @@ def menu_screen(screen):
                         running = False
                         game_running = False
 
-        screen.fill("green")
-        pygame.draw.rect(screen,colorTheme[2],playAreaRect)
-        # pygame.draw.rect(screen,colorTheme[2],menuWall2)
-        screen.blit(welcome, image_rect)
-        pygame.draw.rect(screen,colorTheme[0],selectOption1)
-        screen.blit(font.render('Single', True, colorTheme[3]), (selectOption1.centerx - 25 , selectOption1.centery - 10))
-        pygame.draw.rect(screen,colorTheme[0],selectOption2)
-        
-        screen.blit(font.render('Multi', True, colorTheme[3]), (selectOption2.centerx - 25, selectOption2.centery - 10))
-        pygame.draw.rect(screen,colorTheme[0],selectOption3)
-    
-        screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
-
-    
-    
-    
-    
-            
+           
                     
 
     

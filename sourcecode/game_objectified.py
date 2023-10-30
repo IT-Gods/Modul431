@@ -25,6 +25,9 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
 
     #definitions of ingame objects
+    score = 0
+    scorefont = pygame.font.SysFont('Comic Sans MS', 30)
+
     playerSize = [20,20]
     playerXY = [(DISPLAY_SIZE[0]-playerSize[0])/2,(DISPLAY_SIZE[1]*7/8)-playerSize[1]/2]
 
@@ -65,7 +68,10 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
     enemiesColumn = 0
     deadEnemyCounter = 0
 
-
+    #hearts
+    heartCoordinate = [1000,40]
+    heartSize = [50,50]
+    heart = g.Rectangle(heartCoordinate[0],heartCoordinate[1],heartSize[0],heartSize[1],SPRITESTHEME1[3])
 
     #INSHALLAH MAKE OBJECTS
     player1 = g.Player(playerXY[0],playerXY[1],playerSize[0],playerSize[1], SPRITESTHEME1[0], 3)
@@ -83,7 +89,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
     enemy.bullet2.alive = False
     enemy.bullet3.alive = False
 
-
+    
 
 
     #main game loop
@@ -115,6 +121,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
 
         enemy.makeEnemies(screen)
 
+        #hearts
 
 
                 
@@ -122,6 +129,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             player1.bullet1.moveY(-1,1,screen)
             player1.bullet1.alive = h.detectCollisionEnemies(player1.bullet1.coordinate,player1.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
             if not player1.bullet1.alive:
+                score + = 100
                 enemy.rowDead()
                 enemy.columnDead()
                 enemy.updateLowest()
@@ -131,6 +139,7 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
                 player2.bullet1.moveY(-1,1,screen)
                 player2.bullet1.alive = h.detectCollisionEnemies(player2.bullet1.coordinate,player2.bullet1.size,enemy.coordinate,enemy.size,enemy.dist,enemy.aliveIndividual)
                 if not player1.bullet1.alive:
+                    score += 100
                     enemy.rowDead()
                     enemy.columnDead()
                     enemy.updateLowest() 
@@ -160,6 +169,19 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             elif not  enemy.bullet1.alive:
                 enemy.fire1(enemy.findShotPos(),bulletSize,SPRITESTHEME1[2])
             counter = 0
+        for i in range(player1.lives):
+            heart.makeRect(screen)
+            heart.coordinate[0] += 60
+        heart.coordinate[0] -= 60 * player1.lives
+
+        if playerAmount == 2:
+            heart.coordinate[1] += 80
+            for i in range(player2.lives):
+                heart.makeRect(screen)
+                heart.coordinate[0] += 60
+            heart.coordinate[0] -= 60 * player2.lives
+            heart.coordinate[1] -= 80
+
 
 
     # bullet events for enemies 
@@ -169,6 +191,10 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             if h.collisionRect(enemy.bullet1.coordinate,enemy.bullet1.size,player1.coordinate,player1.size):
                 player1.lives -= 1
                 enemy.bullet1.alive = False
+            if playerAmount == 2:
+                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player1.size):
+                    player2.lives -= 1
+                    enemy.bullet2.alive = False
             #if running: #this is a lose condition with bullet collision FIX LATER PLS TY <3
                 #running = g.collisionPlayerDeath(playerXY, playerSize, bullet1, bulletSize)
 
@@ -178,6 +204,10 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player1.coordinate,player1.size):
                 player1.lives -= 1
                 enemy.bullet2.alive = False
+            if playerAmount == 2:
+                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player1.size):
+                    player2.lives -= 1
+                    enemy.bullet2.alive = False
 
         if enemy.bullet3.alive:
             enemy.bullet3.moveY(1,0.2,screen)
@@ -185,6 +215,12 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
             if h.collisionRect(enemy.bullet3.coordinate,enemy.bullet3.size,player1.coordinate,player1.size):
                 player1.lives -= 1
                 enemy.bullet3.alive = False
+            if playerAmount == 2:
+                if h.collisionRect(enemy.bullet2.coordinate,enemy.bullet2.size,player2.coordinate,player1.size):
+                    player2.lives -= 1
+                    enemy.bullet2.alive = False
+
+
 
         #create player model and update movement
         player1.makeRect(screen)
@@ -199,9 +235,14 @@ def run_game(level, playerAmount, SPRITESTHEME1,screen):
         if player1.lives == 0:
             running = False
 
+        if player2.lives == 0:
+            running = False
             return -1
         if h.victory(enemy.aliveIndividual):
             return 1
 
         pygame.display.flip()  
        
+    file = open('Highscore.txt', 'w')
+    file.write(score)
+    file.close()
