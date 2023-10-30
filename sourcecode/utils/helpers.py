@@ -18,7 +18,6 @@ def victory(aliveIndividual):
         return True
 
 
-#wtf?
 def detectCollisionBorder(XY,screenSize):
 
     if XY[0] == 0 or XY[0] == screenSize[0]:

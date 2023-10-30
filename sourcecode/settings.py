@@ -7,11 +7,6 @@ import settings as settings
 import menu as menu
 
 
-
-
-
-
-
 def make_settings(screen):
     pygame.init()                                   
     clock = pygame.time.Clock()                 
@@ -66,12 +61,6 @@ def make_settings(screen):
     screen.blit(font.render('Red', True, colorTheme[3]), (selectOption3.centerx -  themeSize , selectOption3.centery - 10) )
 
     
-    
-    
-    
-    
-    
-    
     while running:
         pressed = pygame.key.get_pressed()    
         for event in pygame.event.get():             
@@ -94,8 +83,6 @@ def make_settings(screen):
     
     
     
-    
-
 
 
 

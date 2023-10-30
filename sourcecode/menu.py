@@ -73,10 +73,6 @@ def menu_screen(screen):
         pygame.draw.rect(screen,colorTheme[0],selectOption3)
     
         screen.blit(font.render('3 Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
-
-    
-    
-    
     
         pressed = pygame.key.get_pressed()    
         for event in pygame.event.get():             

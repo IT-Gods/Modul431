@@ -29,9 +29,6 @@ running = True
 THEME1= [colorpalette.green(),colorpalette.red(),colorpalette.black(),colorpalette.white()]
 
 
-
-
-
 borderMargin = [20, 20]
 
 playgroundSafeArea = [[borderMargin[0], borderMargin[1]],[DISPLAY_SIZE[0]-borderMargin[0], DISPLAY_SIZE[1]-borderMargin[1]]]
