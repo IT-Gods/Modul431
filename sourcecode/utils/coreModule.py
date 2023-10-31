@@ -69,8 +69,6 @@ class Player(Character):
           return self.moveX(0.5, +1, screen)
         
     
-
-
 class Enemies(Character):
 
 
