@@ -56,7 +56,9 @@ def menu_screen(screen):
     timesSelect += 1
     font = pygame.font.Font('freesansbold.ttf', 20)
 
-   
+    scorefile = open('Highscore.txt', 'r')
+    highscore = int(scorefile.read())
+    scorefile.close()
     
     
     
@@ -74,7 +76,6 @@ def menu_screen(screen):
     
         screen.blit(font.render('3 Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
 
-    
     
     
     
@@ -156,6 +157,7 @@ def menu_screen(screen):
     
         screen.blit(font.render('Settings', True, colorTheme[3]), (selectOption3.centerx - 39, selectOption3.centery - 10) )
 
+        screen.blit(font.render("Highscore: " + str(highscore),True,colorTheme[3]),(50,50))
         pygame.display.flip()
     
     
